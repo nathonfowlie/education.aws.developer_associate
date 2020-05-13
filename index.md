@@ -1,6 +1,4 @@
-# AWS Developer Associate 2020: Study Notes
-
-## Table of Contents
+# Table of Contents
 
 1. [IAM](iam.md)
 2. EC2
