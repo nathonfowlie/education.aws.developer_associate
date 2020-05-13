@@ -283,6 +283,8 @@ defaults:
       comments: true # true
       share: true
       related: true
+      sidebar:
+        nav: "docs"
 
   # _pages
   - scope:
@@ -294,5 +296,13 @@ defaults:
       read_time: true
       comments: true
       share: true
+      sidebar:
+        nav: "docs"
+
+  # _docs
+  - scope:
+      path: ""
+      type: docs
+    values:
       sidebar:
         nav: "docs"
