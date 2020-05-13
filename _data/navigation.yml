@@ -1,53 +1,53 @@
 docs:
- - title: "AWS Fundamentals"
-   children:
-     - title: IAM
-       url: /iam/
-     - title: EC2
-       url: /ec2/
-     - title: ELB
-       url: /elb/
-     - title: ASG
-       url: /asg/
-  - title: "Other AWS Services"
-    #ASG
-    #EBS
-    #EFS
-    #RDS
-    #Aurora
-    #Elasticache
-    #Route53
-    #VPC
-    #S3
-    #AWS CLI
-    #AWS SDK
-    #IAM Roles & Policies
-    #Cloudfront
-    #ECS
-    #ECR
-    #FarGate
-    #Elastic Beanstalk
-    #CodeCommit
+  - title: "AWS Fundamentals"
+    children:
+      - title: IAM
+        url: /iam/
+      - title: EC2
+        url: /ec2/
+      - title: ELB
+        url: /elb/
+      - title: ASG
+        url: /asg/
+   - title: "Other AWS Services"
+     #ASG
+     #EBS
+     #EFS
+     #RDS
+     #Aurora
+     #Elasticache
+     #Route53
+     #VPC
+     #S3
+     #AWS CLI
+     #AWS SDK
+     #IAM Roles & Policies
+     #Cloudfront
+     #ECS
+     #ECR
+     #FarGate
+     #Elastic Beanstalk
+     #CodeCommit
     #CodeBuild
-    #CodePipeline
-    #CodeDeploy
-    #CloudFormation
-    #Cloudwatch
-    #X-ray
-    #Cloudtrail
-    #SQS
-    #SNS
-    #Kinesis
-    #Lambda
-    #DynamoDB
-    #API Gateway
-    #SAM
-    #Cognito
-    #Step Functions
-    #AppSync
-    #Advanced Identity
-    #KMS
-    #Encryption SDK
-    #SSM
-    #IAM
-    #STS
+     #CodePipeline
+      #CodeDeploy
+     #CloudFormation
+     #Cloudwatch
+     #X-ray
+     #Cloudtrail
+     #SQS
+     #SNS
+     #Kinesis
+     #Lambda
+     #DynamoDB
+     #API Gateway
+     #SAM
+     #Cognito
+     #Step Functions
+     #AppSync
+     #Advanced Identity
+     #KMS
+     #Encryption SDK
+     #SSM
+     #IAM
+     #STS
