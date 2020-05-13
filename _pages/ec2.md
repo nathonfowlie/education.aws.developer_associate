@@ -19,9 +19,15 @@ toc_icon: "book-reader"
 - ELB for load balancing.
 - Manage auto-scaling groups (ASG).
 
+## Availability Zones
+
+- Physical data centres.
+- Isolated power suppliers, cooling, power etc.
+- Usually at least 3 per region.
+
 ## Regions
 
-- Geographical location with multiple availability zones (physical data centres).
+- Geographical location with multiple availability zones.
 
 ## Pricing
 
