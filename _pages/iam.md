@@ -1,7 +1,6 @@
 ---
 permalink: /iam/
-toc: false
-toc_label: "Table of Contents"
+toc: true
 toc_icon: "book_open"
 ---
 
