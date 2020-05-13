@@ -2,7 +2,9 @@
 permalink: /iam/
 toc: true
 toc_label: "Table of Contents"
-toc_icon: "book_open"
+toc_icon: book_open
+sidebar:
+  nav: "docs"
 ---
 
 ## Identity & Access Management (IAM)
