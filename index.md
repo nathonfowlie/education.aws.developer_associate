@@ -1,4 +1,4 @@
-# Table of Contents
+## Table of Contents
 
 1. [IAM](iam.md)
 2. EC2
