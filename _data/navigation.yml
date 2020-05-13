@@ -1,4 +1,9 @@
 docs:
+  - title: AWS Fundamentals
+    children:
+      - title: "IAM"
+        url: /iam/
+
   - title: Getting Started
     children:
       - title: "Quick-Start Guide"
