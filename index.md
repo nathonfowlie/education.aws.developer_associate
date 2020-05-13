@@ -5,8 +5,6 @@ sidebar:
   nav: "docs"
 ---
 
-## Table of Contents
-
 1. [IAM](iam.md)
 2. EC2
 3. ELB
