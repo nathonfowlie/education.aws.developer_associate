@@ -1,3 +1,10 @@
+---
+layout: home
+permalink: /
+sidebar:
+  nav: "docs"
+---
+
 ## Table of Contents
 
 1. [IAM](iam.md)
