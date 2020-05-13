@@ -95,7 +95,7 @@ analytics:
 author:
   name             : "Nathon Fowlie"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am a systems engineer with a keen interest in all things automation."
+  bio              : "Systems engineer interested in automation, infrastructure as code, CI/CD and all things 'DevSecOps'."
   location         : "Australia"
   email            :
   links:
