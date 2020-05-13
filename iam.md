@@ -1,7 +1,3 @@
-# AWS Developer Associate 20202: Study Notes
-
-[< Index](index.md)
-
 ## Table of Contents
 
 1. [Identity & Access Management (IAM)](#identity--access-management-iam)
