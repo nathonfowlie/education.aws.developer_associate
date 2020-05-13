@@ -1,6 +1,10 @@
 ---
 layout: home
 permalink: /
+author_profile: true
+read_time: false
+comments: false
+share: false
 sidebar:
   nav: "docs"
 ---
