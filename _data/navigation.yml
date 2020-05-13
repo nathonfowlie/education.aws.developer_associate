@@ -1,5 +1,5 @@
 docs:
- - title: AWS Fundamentals
+ - title: "AWS Fundamentals"
    children:
      - title: IAM
        url: /iam/
@@ -9,7 +9,7 @@ docs:
        url: /elb/
      - title: ASG
        url: /asg/
-  - title: Other AWS Services
+  - title: "Other AWS Services"
     #ASG
     #EBS
     #EFS
