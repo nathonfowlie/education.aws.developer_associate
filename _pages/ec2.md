@@ -97,6 +97,11 @@ sidebar:
   - Once burst credits are exhausted, performance will absolutely tank.
 - T2 has unlimited burst credits, but it costs money if the burst credit limit is exceeded.
 
+| Launch Type | Description | Good For | Committment |
+|-------------|-------------|----------|-------------|
+| On Demmand  | <ul><li>Predictable pricing.</li><li>Billed by the second, with a minimum of 60seconds.</li><li>No upfront payment.</li><li>Highest hourly cost of all the instance launch types.</li></ul> | Short, un-interrupted workloads | None |
+
+
 ### On Demand Instance
 
 - Good for short, un-interrupted workloads.
