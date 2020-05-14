@@ -38,3 +38,70 @@ sidebar:
 ### Active
 
 - Multiple locations with all infrastructure in active use.
+
+## What is Load Balancing?
+
+- Forward traffic to multiple servers (EC2 instances).
+
+## Why use a Load Balancer?
+
+- Spread load.
+- Expose a single endpoint (DNS) to the application.
+- Seamlessly handle downstream failures.
+- Perform regular health checks of instances.
+- SSL termination.
+- Manage sticky sessions.
+- HA across AZs.
+- Segregate public and private traffic.
+
+## EC2 Load Balancer (ELB)
+
+- Guaranteed to be working.
+- AWS manages upgrades, maintenance, high availability.
+- More expensive than setting up your own LB, but much less effort.
+- Integrated with alot of AWS services.
+- Use newer gen ELBs (more features).
+- Can be external (public) or internal (private).
+- Can auto-scale, but it's not instantaneous. Can contact AWS for a 'warm-up'.
+
+### ELB Types
+
+#### Classic Load Balancer (v1)
+
+- HTTP
+- HTTPS
+- TCP
+
+#### Application Load Balancer (v2)
+
+- HTTP
+- HTTPS
+- WebSockets
+
+#### Network Load Balancer (v2)
+
+- TCP
+- TLS
+- UDP
+
+### Health Checks
+
+- Inform LB if instance is healthy.
+- A Classic Load Balancer (v1) will perform the health check against a route & port (foo:8080/healthcheck).
+
+### ELB Security Groups
+
+- Allow HTTP from <any> (public route)
+- Allow HTTPS from <any> (public route)
+- Allow HTTP from <security group 1 used by load balancer> (private route)
+- Allow HTTPS from <security group 1 used by the load balancer> (private route)
+
+### ELB Monitoring
+
+- Access logs log all access requests.
+- CloudWatch metrics provide aggregate stats (connections count etc).
+
+### Troubleshooting ELB
+
+- HTTP 503 means ELB is at capacity or there's no registered targets.
+- If ELB can't connect to app, check security groups.
