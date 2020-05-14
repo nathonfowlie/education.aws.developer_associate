@@ -5,3 +5,5 @@ docs:
         url: /iam/
       - title: "EC2"
         url: /ec2/
+      - title: "ELB"
+        url: /elb/
