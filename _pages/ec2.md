@@ -100,65 +100,12 @@ sidebar:
 | Launch Type | Description | Good For | Committment |
 |-------------|-------------|----------|-------------|
 | On Demmand  | <ul><li>Predictable pricing.</li><li>Billed by the second, with a minimum of 60seconds.</li><li>No upfront payment.</li><li>Highest hourly cost of all the instance launch types.</li></ul> | Short, un-interrupted workloads | None |
-
-
-### On Demand Instance
-
-- Good for short, un-interrupted workloads.
-- Have predictable pricing.
-- Billed by the second, with a minimum of 60seconds.
-- No upfront payment.
-- No long-term committment.
-- Highest hourly cost of all the instance launch types.
-
-### Reserved Instances
-
-- Minimum reservation is 1 year, maximum is 3 years.
-- Upto 75% cheaper than On-Demand instances.
-- Best for long workloads, or steady state applications (database etc).
-- Pay upfront.
-- Must specify the specific instance type to be reserved (SKU).
-
-#### Convertible Reserved Instances
-
-- Upto 54% cheaper than On-Demand instances.
-- Instance type can be changed.
-- Best for long workloads.
-- No upfront payment.
-
-#### Scheduled Reserved Instances
-
-- Reserved in 12month blocks.
-- Best for when a workload needs to be performed within a specific time window (9am-5pm Mon-Fri etc).
-
-### Spot Instances
-
-- Best for short workloads - batch jobs, data analysis, image processing, things that are resilient to failure.
-- Spot instance is given to the higest bidder. If someone bids more, then you can lose the instance with zero notice.
-- There are 4 different types of workloads that can be requested:
-  - Load Balancing (Web services).
-  - Flexible (Batch jobs, CI/CD).
-  - Big Data (Instance can be of any size, in any Availability Zone).
-  - Defined Duration (Between 1 and 6 hrs).
-- 90% cheaper than On-Demand instances.
-
-### Dedicated Instances
-
-- Runs on hardware that is dedicated to a specific account.
-- Hardware may be shared with other EC2 instances within the same account.
-- Can only move hardware after the EC2 instance is stopped.
-- Pay upfront.
-- Per instance billing.
-
-### Dedicated Hosts
-
-- Book a physical server.
-- Uses per instance billing.
-- Good for companies with strong compliance/regulatory requirements, or for bring-your-own-license models where the license is bound to the number of cores.
-- Reserved for 3 years.
-- Provides visibility of the underlying sockets and hardware, such as physical cores.
-- User has full control over the instance placement.
-- Very expensive option (duh?).
+| Reserved | <ul><li>Upto 75% cheaper than On-Demand instances.</li><li>Pay upfront.</li><li>Must specify the specific instance type to be reserved (SKU).</li></ul> | Long workloads, or steady state applications (database etc). | 1 - 3 years |
+| Convertible Reserved | <ul><li>Upto 54% cheaper than On-Demand instances.</li><li>Instance type can be changed.</li><li>No upfront payment.</li></ul> | Long workloads | 1 - 3 years |
+| Scheduled Reserved | | A workload needs to be performed within a specific time window (9am-5pm Mon-Fri etc). | 1 year |
+| Spot | <ul><li>Spot instance is given to the higest bidder. If someone bids more, then you can lose the instance with zero notice.</li><li>Four types - Load balancing (web services), Flexible (batch, ci/cd), Big data (any size, any AZ) and Defined duration (1-6hrs)</li><li>90% cheaper than On-Demand instances.</li</ul> | Short workloads - batch jobs, data analysis, image processing, things that are resilient to failure. |
+| Dedicated Instance | <ul><li>Runs on hardware that is dedicated to a specific account.</li><li>Hardware may be shared with other EC2 instances within the same account.</li><li>Can only move hardware after the EC2 instance is stopped.</li><li>Pay upfront.</li><li>Per instance billing.</li></ul> | | None |
+  | Dedicated Hosts | <ul><li>Reserve a physical server</li><li>Per instance billing</li><li>Provides visibility of the underlying sockets and hardware, such as physical cores.</li><li>User has full control over the instance placement.</li><li>Expensive</li></ul> | Companies with strong compliance/regulatory requirements, or for bring-your-own-license models where the license is bound to the number of cores. | 3 years |
 
 ## Pricing
 
