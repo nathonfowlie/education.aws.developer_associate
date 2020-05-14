@@ -24,18 +24,6 @@ sidebar:
 
 - Geographical location with multiple availability zones.
 
-## Pricing
-
-- Hourly prices are based on:
-    1. Region
-    2. Instance type
-    3. On-Demand vs Spot vs Reserved vs Dedicated hosts.
-    4. IS
-    5. Lots more...
-- Billed by the second, with a minimum of 60seconds.
-- Don't pay for stopped instances.
-- Additional cost for storage, data transfer, public/private IPs, load balancing etc.
-
 ## Amazon Machine Image (AMI)
 
 - Base image.
@@ -52,10 +40,40 @@ sidebar:
 - Security concerns (need more control of the image).
 - Control the maintenance & updates of AMIs over time.
 - Optimised for a specific purpose.
-- 
+
+## Security Groups
+
+- Provide access to ports.
+- Control authorised port ranges.
+- Control inbound/outbound traffic.
+- Can attach to multiple instances.
+- EC2 instance can have multiple security groups.
+- Bound to a specific Region/VPC combination.
+- Reside outside of the EC2 instance so the instance never recieves blocked traffic.
+- All inbound traffic is blocked by default.
+- All outbound traffic is permitted by default.
+- Security groups can reference another security group for defining inbound/outbound rules (SG1 is allowed to connect to EC2 instances assigned SG2, but SG3 isn't).
+- Generally a good idea to keep a seperate SSH security group as it's commonly required.
+
+## Pricing
+
+- Hourly prices are based on:
+    1. Region
+    2. Instance type
+    3. On-Demand vs Spot vs Reserved vs Dedicated hosts.
+    4. IS
+    5. Lots more...
+- Billed by the second, with a minimum of 60seconds.
+- Don't pay for stopped instances.
+- Additional cost for storage, data transfer, public/private IPs, load balancing etc.
+
 
 ## EC2 User Data
 
 - Runs once, the first time an instance is started.
 - Runs as root.
 - Script is base64 encoded.
+
+## EC Instance Connect
+
+- Provides web-based SSH access to EC2 instances.
