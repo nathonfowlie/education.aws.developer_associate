@@ -1,18 +1,10 @@
 ---
-layout: page
 permalink: /ec2/
-author_profile: true
-read_time: false
-comments: false
-share: false
 toc: true
 toc_label: "Table of Contents"
 toc_icon: "book-reader"
 sidebar:
   nav: "docs"
-toc: true
-toc_label: "Table of Contents"
-toc_icon: "book-reader"  
 ---
 
 ## What is EC2?
