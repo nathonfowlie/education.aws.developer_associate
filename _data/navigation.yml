@@ -1,9 +1,11 @@
 docs:
   - title: AWS Fundamentals
     children:
-      - title: "IAM"
+      - title: "Identity & Access Management (IAM)"
         url: /iam/
       - title: "EC2"
         url: /ec2/
-      - title: "ELB"
+      - title: "Elastic Load Balancers (ELB)"
         url: /elb/
+      - title: "Auto-scaling Groups (ASG)"
+        url: /asg/
