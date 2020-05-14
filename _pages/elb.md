@@ -98,11 +98,16 @@ sidebar:
 - Fixed hostname.
 - Application servers don't see the client IP. Client ip/port/protocol are available via the X-Forwarded-For and X-Forwarded-Proto/X-Forwarded-Port headers.
 
-#### Network Load Balancer (v2)
+#### Network Load Balancer (NLB)
 
-- TCP
-- TLS
-- UDP
+- TCP/UDP/TLS traffic (Layer 4).
+- Handle millions of TPS.
+- Less latency (100ms vs 400mb of ALB).
+- One static IP per AZ.
+- Supports assigned Elastic IPs.
+- Used for extreme performance, and TCP/UDP level traffic.
+- Security group doesn't see the traffic as coming from the NLB, which impacts the "source" attribute of the security groups rule.
+- Subnets can't be disabled after the NLB is created, but new ones can be added. This means Elastic IP has to be created before the NLB is created (if you want to use an Elastic IP).
 
 ### Health Checks
 
