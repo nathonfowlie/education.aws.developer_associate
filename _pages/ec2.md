@@ -85,6 +85,18 @@ sidebar:
 - Should be avoided as much as possible.
 - Costs money when not in use.
 
+# EC2 Instance Launch Types
+
+- Use reserved instance type for base application, and On-Demand/Spot instance types to handle peaks.
+- Five main attributes - RAM, CPU, Memory, IO, Network, GPU.
+- There's over 50 of the damned things.
+- The letter represents the launch types specialty. C = cpu optimised, R = memory optmised etc.
+- M instance types are all-rounders. Medium performance.
+- T2/T3 instance types are burstable, based on burst credits.
+  - Burst credits accumulate over time.
+  - Once burst credits are exhausted, performance will absolutely tank.
+- T2 has unlimited burst credits, but it costs money if the burst credit limit is exceeded.
+
 ## Pricing
 
 - Hourly prices are based on:
