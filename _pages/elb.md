@@ -151,7 +151,8 @@ sidebar:
 ## SLB/TLS Certificates
 
 - Load balancers use an X.509 certificate.
-- You can use manage certificates using AWS Certificate Manager (ACM).
+- You can use/manage certificates from AWS Certificate Manager (ACM).
+- You can use certificates from IAM.
 - Can also use your own certificates.
 - When configuring the HTTPS listener:
   - Must specify a default certificate.
