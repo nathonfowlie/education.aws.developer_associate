@@ -130,3 +130,17 @@ sidebar:
 
 - HTTP 503 means ELB is at capacity or there's no registered targets.
 - If ELB can't connect to app, check security groups.
+
+## Stickyness
+
+- Same client is always redirected to the same instance behind a load balancer.
+- Uses a cookie with an expiration date to track which instance the client should be routed to.
+- Helps to preserve session data.
+- May cause a load imbalance.
+
+## Cross-Zone Load Balancing
+
+- Each load balance instance distributes evenly across all registered instances in all AZs.
+- Disabled by default on CLB. No additional charges for inter AZ data.
+- Enabled on ALB, can't be turned off. No charges for inter AZ data.
+- Disabled by default for NLB. Additional charges for inter AZ data.
