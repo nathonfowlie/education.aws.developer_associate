@@ -46,4 +46,30 @@ sidebar:
 - Custom metrics send to CloudWatch from the application (connected user count etc).
 - Schedule (usage patterns).
 
-### 
+
+### Configuring ASG
+
+- Can adhere to the launch template assigned to the ASG, or specify the mix of instance types and purchase options (ie: keep a percentage of reserved instances, and auto-scale with On-Demand/Spot instances during peaks).
+- Two types of health checks available when setting up the ASG. EC2, or ELB. Select ELB to have the ASG automatically terminate any unhealthy instances and provision new ones.
+
+### Scaling Policies
+
+- Target tracking scaling
+  - Most simple and easiest to setup.
+  - I want the average ASG CPU to stay at around 40%
+- Simple/Step Scaling
+  - When a CloudWatch alarm is triggered, scale out (ex: CPU > 70%).
+  - When a CloudWatch alarm is triggered, scale in (ex: CPU < 30%).
+- Scheduled Actions
+  - Anticipate scaling based on usage patterns (increase min capacity at 5pm on Fridays).
+
+### Scaling Cool-down
+
+- Helps ensure ASG doesn't launch/terminate instances before the next scaling event takes place.
+- Can create cool-down periods that apply to a specific simple scaling policy.
+- A scaling specific cool-down overrides the default cooldown period.
+- Commonly used for scale-in policies. Onces that terminate instances based on criteria. Gives EC2 auto-scaling more time to determine if it needs to terminated additional instances.
+- Scaling cool-down can be used to scale in faster to help reduce costs.
+- Modify cool-down timers and the CloudWatch alarm period if the application is scaling in and out too many times each hour.
+- Default cool-down period is 300 seconds.
+- Can disable scale-in in the scaling policy, to make it scale-out only.
