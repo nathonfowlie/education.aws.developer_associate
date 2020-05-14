@@ -166,3 +166,15 @@ sidebar:
 - Client indicates which hostname of the target server it should connect to during the SSL handshake.
 - Only available on ALB, NLB and Cloudfront.
 - Doesn't work on CLB.
+
+## ELB Connection Draining
+
+- Called "connection draining" on CLB.
+- Call "deregistration delay" on ALB and NLB.
+- Is the time to complete in-flight requests while the instance is being de-registered or is unhealthy.
+- Stops sending new requests to the instance which is de-registering.
+- De-registration delay is 300sec by default. 
+- De-registration delay can be anything from 1 to 3600 seconds.
+- Default de-registration delay is 300 seconds.
+- De-registration delay can be set to 0 (disabled).
+- Use low value if requests are short.
