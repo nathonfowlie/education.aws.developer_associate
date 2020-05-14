@@ -71,6 +71,7 @@ sidebar:
 - Supports TCP (Layer 4) and HTTP & HTTPS (Layer 7).
 - Health checks are TCP or HTTP based.
 - Have a fixed hostname <foo>.<region>.elb.amazonaws.com.
+- One SSL certificate, doesn't support SNI.
   
 #### Application Load Balancer (v2)
 
@@ -86,6 +87,7 @@ sidebar:
 - Good for micros services and container-based applications.
 - Supports port mapping to redirect to dynamic ports (useful for ECS).
 - Would require multiple CLBs to load balance multiple applications, vs 1 ALB.
+- Supports SNI, using multiple listeners with multiple SSL certs.
 
 ##### ALB Target Groups
 
@@ -108,6 +110,7 @@ sidebar:
 - Used for extreme performance, and TCP/UDP level traffic.
 - Security group doesn't see the traffic as coming from the NLB, which impacts the "source" attribute of the security groups rule.
 - Subnets can't be disabled after the NLB is created, but new ones can be added. This means Elastic IP has to be created before the NLB is created (if you want to use an Elastic IP).
+- User SNI to support multiple listeners, with multiple SSL certificates.
 
 ### Health Checks
 
@@ -140,7 +143,25 @@ sidebar:
 
 ## Cross-Zone Load Balancing
 
-- Each load balance instance distributes evenly across all registered instances in all AZs.
+- Each load balancer instance distributes evenly across all registered instances in all AZs.
 - Disabled by default on CLB. No additional charges for inter AZ data.
 - Enabled on ALB, can't be turned off. No charges for inter AZ data.
 - Disabled by default for NLB. Additional charges for inter AZ data.
+
+## SLB/TLS Certificates
+
+- Load balancers use an X.509 certificate.
+- You can use manage certificates using AWS Certificate Manager (ACM).
+- Can also use your own certificates.
+- When configuring the HTTPS listener:
+  - Must specify a default certificate.
+  - An optional list of certs can be addded to support multiple domains.
+  - Clients can use SNI (Server Name Indication) to specify the hostname they reach.
+  - Can apply a security policy to support older versions of SSL/TLS.
+
+### Server Name Indication (SNI)
+
+- Use multiple SSL certificates on the same web server.
+- Client indicates which hostname of the target server it should connect to during the SSL handshake.
+- Only available on ALB, NLB and Cloudfront.
+- Doesn't work on CLB.
