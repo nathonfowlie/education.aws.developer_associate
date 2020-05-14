@@ -99,7 +99,7 @@ sidebar:
 
 | Launch Type | Description | Good For | Committment |
 |-------------|-------------|----------|-------------|
-| On Demmand  | <ul><li>Predictable pricing.</li><li>Billed by the second, with a minimum of 60seconds.</li><li>No upfront payment.</li><li>Highest hourly cost of all the instance launch types.</li></ul> | Short, un-interrupted workloads | None |
+| On Demmand  | - Predictable pricing.<br/>- Billed by the second, with a minimum of 60seconds.<br/>- No upfront payment.<br/>- Highest hourly cost of all the instance launch types. | Short, un-interrupted workloads | None |
 | Reserved | <ul><li>Upto 75% cheaper than On-Demand instances.</li><li>Pay upfront.</li><li>Must specify the specific instance type to be reserved (SKU).</li></ul> | Long workloads, or steady state applications (database etc). | 1 - 3 years |
 | Convertible Reserved | <ul><li>Upto 54% cheaper than On-Demand instances.</li><li>Instance type can be changed.</li><li>No upfront payment.</li></ul> | Long workloads | 1 - 3 years |
 | Scheduled Reserved | | A workload needs to be performed within a specific time window (9am-5pm Mon-Fri etc). | 1 year |
