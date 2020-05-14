@@ -68,15 +68,35 @@ sidebar:
 
 #### Classic Load Balancer (v1)
 
-- HTTP
-- HTTPS
-- TCP
-
+- Supports TCP (Layer 4) and HTTP & HTTPS (Layer 7).
+- Health checks are TCP or HTTP based.
+- Have a fixed hostname <foo>.<region>.elb.amazonaws.com.
+  
 #### Application Load Balancer (v2)
 
-- HTTP
-- HTTPS
-- WebSockets
+- Supports HTTP, HTTPS and WebSockets (Layer 7).
+- Load balance multiple HTTP applications across machines (target groups).
+- Load balance multiple HTTP applications on the same machine (containers).
+- Supports HTTP/2 and WebSocket.
+- Supports redirects.
+- Supporting routing tables based on target groups:
+  - Path in URL.
+  - Hostname in URL.
+  - Query string & headers.
+- Good for micros services and container-based applications.
+- Supports port mapping to redirect to dynamic ports (useful for ECS).
+- Would require multiple CLBs to load balance multiple applications, vs 1 ALB.
+
+##### ALB Target Groups
+
+- EC2 instances (managed via auto-scaling group) - HTTP.
+- ECS tasks (managed by ECS) - HTTP.
+- Lambda functions - HTTP request translated into a JSON event.
+- IP Addresses - Must be private IPs.
+- Route to multiple target groups.
+- Health checks performed at the target group level.
+- Fixed hostname.
+- Application servers don't see the client IP. Client ip/port/protocol are available via the X-Forwarded-For and X-Forwarded-Proto/X-Forwarded-Port headers.
 
 #### Network Load Balancer (v2)
 
