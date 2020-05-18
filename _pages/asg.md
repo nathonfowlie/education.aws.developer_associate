@@ -1,10 +1,12 @@
 ---
+header:
+  image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /asg/
-toc: true
-toc_label: "Table of Contents"
-toc_icon: "book-reader"
 sidebar:
   nav: "docs"
+toc: true
+toc_icon: "book-reader"
+toc_label: "Table of Contents"
 ---
 
 ## What's an Auto-scaling Group?
