@@ -1,8 +1,6 @@
 ---
 header:
-  excerpt: Auto-scaling Groups (ASG)
   image: "/assets/images/aws_developer_associate_teaser.jpg"
-  show_overlay_excerpt: true
 permalink: /asg/
 sidebar:
   nav: "docs"
