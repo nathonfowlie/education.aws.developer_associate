@@ -40,3 +40,21 @@ sidebar:
 - Need to install the amazon-efs-utils package or nfs-utils.
 - Mounting using efs helper, or nfs client.
 - Make sure security group allows NFS port 2049.
+
+## Cleaning up EFS
+
+- Make sure volumes are removed after deleting EFS volume.
+- Make sure security group(s) are cleaned up.
+
+## EBS vs EFS
+
+- EBS can only be attached to one instance at a time. EFS can attach to multiple instances.
+- EBS is bound to a specific AZ, EFS is multi-AZ.
+- EFS only for linux (NFS).
+- EFS is more expensive than EBS.
+- Can use EFS-IA to save money via lifecycle policy.
+- EFS billed for what you use. EBS you pay for provisioned capacity.
+- gp2 IO increases if the disk size increases.
+- io1 can increase IO independantly of disk size.
+- To migrate EBS volume across AZ, take a snapshot, and restore into the new AZ. Uses alot of IO.
+- EBS will be terminated by default when the instance is terminated (can be turned off).
