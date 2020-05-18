@@ -306,7 +306,5 @@ defaults:
       author_profile: true
       comments: true
       share: true
-      header:
-        image: "/assets/images/aws_developer_associate_teaser.jpg"
       sidebar:
         nav: "docs"
