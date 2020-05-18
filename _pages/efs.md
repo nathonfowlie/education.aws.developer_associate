@@ -23,6 +23,20 @@ sidebar:
 - Performance mode is set at creation time.
   - General purpose (default): latency sensitive use cases (web servers etc).
   - Max IO: higher latency, highly parallel (big data, media processing).
-- Storage tiers using lifecycle management.
+- Can use lifecycle management to remove files after a number of days.
+- Throughput mode has two options
+  - Bursting
+  - Provisioned
+- Performance mode has two options
+  - General purpose
+  - Max I/O
+- Can have a public or private IP.
+- Two modes
   - Standard: Frequently accessed files.
   - Infrequent Access (EFS-IA): cheaper to store files, but additional cost to retrieve files.
+
+## Mounting EFS volumes
+
+- Need to install the amazon-efs-utils package or nfs-utils.
+- Mounting using efs helper, or nfs client.
+- Make sure security group allows NFS port 2049.
