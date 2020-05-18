@@ -17,3 +17,5 @@ docs:
         url: /rds/
       - title: "Aurora"
         url: /aurora/
+      - title: "Elasticache"
+        url: /elasticache/
