@@ -9,3 +9,5 @@ docs:
         url: /elb/
       - title: "Auto-scaling Groups (ASG)"
         url: /asg/
+      - title: "EBS"
+        url: /ebs/
