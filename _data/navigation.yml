@@ -11,3 +11,5 @@ docs:
         url: /asg/
       - title: "EBS"
         url: /ebs/
+      - title: "Elastic File System (EFS)"
+        url: /efs/
