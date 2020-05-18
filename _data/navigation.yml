@@ -13,3 +13,5 @@ docs:
         url: /ebs/
       - title: "Elastic File System (EFS)"
         url: /efs/
+      - title: "Relational Database Service (RDS)"
+        url: /rds/
