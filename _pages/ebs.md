@@ -38,6 +38,10 @@ sidebar:
 - Some instances don't come with root EBS volumes.
 - Instance stores are ephemeral storage.
 - Physically attached to the machine.
-- Provides better IO performance.
--  Good for buffering/caching/scratch data/temporary content.. Data survives reboots.
+- Provides better IO performance (up to millions on IOPS).
+- Good for buffering/caching/scratch data/temporary content.. Data survives reboots.
 - Instance store is lost on termination and can't be resized. Backups need to be operated by the user.
+- Up to 7.5TB, striped them to reach 30TB.
+- Viewed on the instance as block storage.
+- Risk of data loss if hardware fails.
+
