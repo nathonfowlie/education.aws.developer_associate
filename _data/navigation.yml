@@ -15,3 +15,5 @@ docs:
         url: /efs/
       - title: "Relational Database Service (RDS)"
         url: /rds/
+      - title: "Aurora"
+        url: /aurora/
