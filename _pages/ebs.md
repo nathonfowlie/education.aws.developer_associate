@@ -44,4 +44,3 @@ sidebar:
 - Up to 7.5TB, striped them to reach 30TB.
 - Viewed on the instance as block storage.
 - Risk of data loss if hardware fails.
-
