@@ -19,3 +19,5 @@ docs:
         url: /aurora/
       - title: "Elasticache"
         url: /elasticache/
+      - title: "Route53"
+        url: /route53/
