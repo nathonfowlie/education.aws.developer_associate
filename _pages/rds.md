@@ -79,6 +79,7 @@ sidebar:
 - Snapshots of un-encrypted databases are also un-encrypted.
 - Snapshots of an encrypted database are also encrypted.
 - Can copy a snapshot into an encrypted one.
+- TDE not supported by Postgresql.
 
 ### Encrypting an un-encrypted database
 
@@ -97,7 +98,7 @@ sidebar:
 
 - IAM policies help control who can manage the RDS.
 - Traditional username/password to login to the database.
-- IAM-based authentication for MySQL and PostgreSQL.
+- IAM-based authentication for MySQL and PostgreSQL. Not supported by Oracle.
 
 ### IAM Authentication
 
