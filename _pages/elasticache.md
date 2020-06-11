@@ -9,7 +9,7 @@ toc_icon: "book-reader"
 toc_label: "Table of Contents"
 ---
 
-## ElastiCache
+## Overview
 
 - Managed cache (Redis/Memcached)
 - In-memory database with high performance, low latency.
@@ -20,12 +20,14 @@ toc_label: "Table of Contents"
 - Mult AZ failover.
 - Data needs to be well structured.
 
-### Use Case: DB Cache
+## Use Cases
+
+### DB Cache
 
 - Application queries elasticache, if no hit, then get the data from the RDS.
 - Requires an invalidation strategy to ensure current/relevant data is cached.
 
-### Use Case: User Session Store
+### User Session Store
 
 - User logs into the application, then writes session date into elasticache.
 - The user hits another instance of the application, it gets the state from elasticache to avoid re-authenticating.
