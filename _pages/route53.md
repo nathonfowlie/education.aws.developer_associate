@@ -10,7 +10,7 @@ toc_label: "Table of Contents"
 ---
 
 
-## Route53
+## Overview
 
 - Managed DNS service.
 - Most common records -
@@ -22,24 +22,21 @@ toc_label: "Table of Contents"
 - Can use private domain names that can only be resolved by instances within the VPC.
 - Costs $0.50/month per hosted zone.
 - Global service.
-
-## Advanced Features
-
-- Load balancing
-- Health checks
-- Routing policies (simple, failover, geolocation, latency, weighted, multi value)
+- Provides advanced features like load balancing, health checks, routing policies.
 
 ## Time to Live (TTL)
 
 - Web browser caches DNS record for given number of seconds to minimise DNS lookups.
 - Default TTL is 300secs.
 
-## CNAME
+## Common DNS Records
+
+### CNAME
 
 - Points a hostname to any another hostname.
 - Can't be used for root domains.
 
-## Alias
+### Alias
 
 - Points a hostname to an AWS resource (foo.amazonaws.com)
 - Can be used for root domains (zone apex).
