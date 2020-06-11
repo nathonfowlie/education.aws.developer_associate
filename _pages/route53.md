@@ -9,9 +9,6 @@ toc_icon: "book-reader"
 toc_label: "Table of Contents"
 ---
 
-
-## Overview
-
 - Managed DNS service.
 - Most common records -
   - A (hostname to IPv4)
