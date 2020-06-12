@@ -1,4 +1,5 @@
 ---
+title: "EC2"
 header:
   image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /ec2/
