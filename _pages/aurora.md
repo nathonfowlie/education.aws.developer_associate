@@ -1,4 +1,5 @@
 ---
+title: "Aurora"
 header:
   image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /aurora/
@@ -23,7 +24,7 @@ toc_label: "Table of Contents"
 - 20% more than RDS.
 - Only one Aurora instance (master) takes writes.
 
-### High Availability
+## High Availability
 
 - Uses shared storage volume, to store 6 copies of data across 3 AZs.
 - Only needs 4 copies out of 6 for writes, and 3 out of 6 for reads.
@@ -32,17 +33,17 @@ toc_label: "Table of Contents"
 - Automated failover for master in less than 30seconds.
 - Supports cross region replication.
 
-### Read Scaling
+## Read Scaling
 
 - Read replicas support auto-scaling.
 
-### Aurora DB Cluster
+## Aurora DB Cluster
 
 - DNS name (writer endpoint) always pointing to master to write data.
 - Reader endpoint manages connection load balancing to connect client to one of the read replicas.
 - Load balancing is done at the connection level.
 
-### Features
+## Features
 
 - Automatic failover.
 - Backup & recovery.
@@ -54,7 +55,7 @@ toc_label: "Table of Contents"
 - Routine maintenance.
 - Backtrack.
 
-### Security
+## Security
 
 - Encryption at rest via KMS.
 - Automated backups, snapshots and replicas are encrypted.
