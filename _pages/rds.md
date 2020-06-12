@@ -1,4 +1,5 @@
 ---
+title: "RDS"
 header:
   image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /rds/
@@ -9,7 +10,7 @@ sidebar:
   nav: "docs"
 ---
 
-## What is RDS
+## What is RDS?
 
 - Managed DB service that uses SQL.
 - Database name needs to be unique across the region.
@@ -107,7 +108,7 @@ sidebar:
 - EC2 instance is given an IAM role to allow it to request an auth token from the RDS service via API.
 - EC2 instance uses SSL encryption and passes the auth token through to the RDS instance.
 
-#### Benefits
+#### Benefits of IAM authentication
 
 - Requires SSL.
 - IAM roles and EC2 instance profiles for easy migration.
