@@ -1,4 +1,5 @@
 ---
+title: "EBS"
 header:
   image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /ebs/
