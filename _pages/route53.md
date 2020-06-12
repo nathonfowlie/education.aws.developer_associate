@@ -1,4 +1,5 @@
 ---
+title: "Route 53"
 header:
   image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /route53/
