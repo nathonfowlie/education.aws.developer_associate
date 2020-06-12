@@ -1,4 +1,5 @@
 ---
+title: "Auto-Scaling Groups"
 header:
   image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /asg/
@@ -21,7 +22,7 @@ toc_label: "Table of Contents"
 - When instances are terminated, the ASG will automatically create new instances.
   - Instances can be terminated when marked as unhealthy by a LB.
 
-### ASG Attributes
+## ASG Attributes
 
 - Launch configuration
   - AMI + instance type.
@@ -35,12 +36,12 @@ toc_label: "Table of Contents"
   - Load balancer information.
   - Scaling policies.
 
-### Auto-scaling Alarms
+## Auto-scaling Alarms
 
 - ASG can be scaled based on CloudWatch alarms.
 - Alarms can be anything, average CPU etc.
 
-### Auto-scaling  Rules
+## Auto-scaling  Rules
 
 - Target average CPU usage.
 - Number of requets on the ELB per instance.
@@ -49,12 +50,12 @@ toc_label: "Table of Contents"
 - Schedule (usage patterns).
 
 
-### Configuring ASG
+## Configuring ASG
 
 - Can adhere to the launch template assigned to the ASG, or specify the mix of instance types and purchase options (ie: keep a percentage of reserved instances, and auto-scale with On-Demand/Spot instances during peaks).
 - Two types of health checks available when setting up the ASG. EC2, or ELB. Select ELB to have the ASG automatically terminate any unhealthy instances and provision new ones.
 
-### Scaling Policies
+## Scaling Policies
 
 - Target tracking scaling
   - Most simple and easiest to setup.
@@ -65,7 +66,7 @@ toc_label: "Table of Contents"
 - Scheduled Actions
   - Anticipate scaling based on usage patterns (increase min capacity at 5pm on Fridays).
 
-### Scaling Cool-down
+## Scaling Cool-down
 
 - Helps ensure ASG doesn't launch/terminate instances before the next scaling event takes place.
 - Can create cool-down periods that apply to a specific simple scaling policy.
