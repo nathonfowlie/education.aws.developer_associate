@@ -10,7 +10,7 @@ toc_icon: "book-reader"
 toc_label: "Table of Contents"
 ---
 
-## Overview
+## What is Elasticache?
 
 - Managed cache (Redis/Memcached)
 - In-memory database with high performance, low latency.
