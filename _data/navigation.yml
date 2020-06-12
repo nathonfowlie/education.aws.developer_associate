@@ -21,3 +21,5 @@ docs:
         url: /elasticache/
       - title: "Route53"
         url: /route53/
+      - title: "VPC"
+        url: /vpc/
