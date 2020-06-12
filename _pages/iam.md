@@ -1,4 +1,5 @@
 ---
+title: "Identity & Access Management"
 header:
   image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /iam/
@@ -18,17 +19,17 @@ sidebar:
 - Has pre-defined policies.
 - Should follow least privilege principle.
 
-### Best Practise
+## Best Practise
 
 - Delete the root access keys.
 - Activate MFA.
 - Create an IAM user.
 - Create a group to allocate permissions.
 
-### IAM Federation
+## IAM Federation
 
 Integrates corporate user respositories via SAML (LDAP etc).
 
-### Roles
+## Roles
 
 - One role per application.
