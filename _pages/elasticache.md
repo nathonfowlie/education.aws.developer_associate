@@ -1,4 +1,5 @@
 ---
+title: "Elasticache"
 header:
   image: "/assets/images/aws_developer_associate_teaser.jpg"
 permalink: /elasticache/
@@ -31,7 +32,6 @@ toc_label: "Table of Contents"
 
 - User logs into the application, then writes session date into elasticache.
 - The user hits another instance of the application, it gets the state from elasticache to avoid re-authenticating.
-
 
 ## Redis
 
