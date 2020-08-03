@@ -72,3 +72,9 @@ Via the visual editor -
 Use the ```--dry-run``` arg to validate permissions without creating resources. For example:
 
     aws ec2 run-instances --dry-run --image-id ami-06340c8c12baa6a09 --instance-type t2.micro
+
+## Best Practise
+
+- Never store AWS credentials in code (duh). Use the credentials chain
+- Use IAM roles as much as possible within AWS.
+- Use environment variables or a named profile when working outside of AWS.
