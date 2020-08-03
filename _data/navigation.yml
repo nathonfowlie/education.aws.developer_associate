@@ -25,3 +25,7 @@ docs:
         url: /s3/
       - title: "VPC"
         url: /vpc/
+  - title: Developing on AWS
+    children:
+      - title: "Command Line Interface"
+        url: /cli/
