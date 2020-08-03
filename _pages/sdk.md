@@ -22,17 +22,17 @@ toc_label: "Table of Contents"
   - Go
   - Ruby
   - C++
-- SDK selects us-east-1 will be set as the default region if none is specified.
+- SDK selects ```us-east-1``` will be set as the default region if none is specified.
 
 ## AWS Limits
 
-For intermittent rate limit errors (ThrottlingException), use an Exponential Backoff. There's a back-off mechanism built into the CLI and SDK.
+For intermittent rate limit errors (```ThrottlingException```), use an Exponential Backoff. There's a back-off mechanism built into the CLI and SDK.
 
 For consistent rate limit errors, request for an API throttling limit increase.
 
 ### API Rate Limits
 
-Every AWS API has a rate limit. For example,
+Every AWS API has a rate limit. For example -
 
 - DescribeInstances API for EC2 has a limit of 100 calls/second.
 - GetObject on S3 has a limit of 5,500 GET per second, per prefix.
@@ -54,7 +54,7 @@ The SDK will look for credentials in the following order:
 
 ## Signing API Requests
 
-- The CLI and SDK sign HTTP requests for you using your credentials
+- The CLI and SDK sign HTTP requests for you using your credentials.
 - For your own code, need to sign HTTP requests using Signature V4 (SigV4).
 - Example signed HTTP request using a HTTP header:
 
