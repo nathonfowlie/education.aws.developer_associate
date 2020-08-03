@@ -23,3 +23,24 @@ toc_label: "Table of Contents"
   - Ruby
   - C++
 - SDK selects us-east-1 will be set as the default region if none is specified.
+
+## AWS Limits (Quotas)
+
+### API Rate Limits
+
+Every AWS API has a rate limit. For example,
+
+- DescribeInstances API for EC2 has a limit of 100 calls/second.
+- GetObject on S3 has a limit of 5,500 GET per second, per prefix.
+
+For intermittent rate limit errors (ThrottlingException), use an Exponential Backoff. For consistent errors, request for an API throttling limit increase.
+  
+### Service Quotas (Service Limits)
+
+- Maximum number of resources that can be run (ie: 1,152 vCPU for On-Demand standard instances).
+- Can request a service limit increase by opening a ticket, or
+- Can request a service quotes increase via the Service Quotas API.
+
+### Exponential Backoff
+
+- Retry mechanism built into the SDK.
