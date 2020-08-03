@@ -110,3 +110,15 @@ Error messages can be decoded using the ```sts``` command.
         aws_session_token = <value from returned json>
 
 6. Now API calls using that profile will use the temporary credentials.
+
+
+## CLI Credentials Provider Chain
+
+The CLI looks for credentials in the following order:
+
+1. Command line options (```--region```, ```--output```, and ```--profile```).
+2. Environment variables (```AWS_ACCESS_KEY_ID```, ```AWS_SECRET_ACCESS_KEY```, ```AWS_SESSION_TOKEN```).
+3. Credentials file (```$HOME/.aws/credentials```).
+4. Configuration file (```$HOME/.aws/config```).
+5. Container credentials (for ECS tasks).
+6. Instance profile credentials (for EC2 instance profiles).
