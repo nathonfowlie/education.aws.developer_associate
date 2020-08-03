@@ -10,7 +10,7 @@ sidebar:
   nav: "docs"
 ---
 
-# Overview
+## Overview
 
 - Allows e-mails to be sent via SMTP or the AWS SDK.
 - Integrates with S3, SNS and Lambda.
