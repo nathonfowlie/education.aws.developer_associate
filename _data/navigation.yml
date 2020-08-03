@@ -29,3 +29,5 @@ docs:
     children:
       - title: "Command Line Interface"
         url: /cli/
+      - title: "AWS SDK"
+        url: /sdk/
