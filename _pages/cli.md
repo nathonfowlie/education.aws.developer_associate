@@ -14,14 +14,11 @@ toc_label: "Table of Contents"
 
 There's several ways to develop on AWS -
 
-- AWS CLI from local machine
-- AWS CLI from EC2 instance
-- AWS SDK from local machine
-- AWS SDK from EC2 instance
-- AWS Instance Metadata Server for EC2
+- AWS CLI from local machine or EC2 instance.
+- AWS SDK from local machine or EC2 instance.
+- AWS Instance Metadata Server for EC2.
 
 ## Configuration
-
 
 ### Local Environment
 
@@ -30,27 +27,14 @@ There's several ways to develop on AWS -
 3. Save the details somewhere secure.
 4. Run ```aws configure``` in a command prompt.
 5. Provide the access key and secret access key when prompted.
-6. Set the default region (eg: ap-southwest-1a)
-7. Select the default output format (default is json if not specified).
+6. Set the default region (default: ```us-east-1```).
+7. Select the default output format (default: ```json```).
 8. Config files are written to ```$HOME/.aws/config``` and ```$HOME/.aws/credentials```.
 
 ### EC2 Instance
 
-- Use an IAM role, don't store credentials on the instance.
+- Use an IAM role to allow the EC2 instance to make certain API calls, don't store credentials on the instance.
 - EC2 instances will use the profiles/roles automatically.
-
-1. Run ```aws configure```.
-2. Don't specify anything for access or secret key
-3. Set the default region
-4. Set the default output format
-5. In IAM, create a new role attached to an AWS service
-6. Select (EC2)
-7. Click next
-8. Select the relevant services (eg: AmazonS3ReadOnlyAccess)
-9. Click next
-10. Set the role name and description
-11. Click next and finish.
-12. Attach the new IAM role to the EC2 instance.
 
 ## Credentials Provider Chain
 
@@ -79,15 +63,12 @@ Each profile is stored as a ini section in ```$HOME/.aws/config``` and ```$HOME/
 
 ## Multi-factor Authentication (MFA)
 
-1. Need to assign a MFA device in IAM to the user. Usual process:
-    a. Scan QR code.
-    b. Enter 2 consecutive codes.
+1. Use IAM to assign a MFA device to the user.
 2. Create a temporary session
 
         aws sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token --duration-seconds 3600
 
-3. Take not of the temporary access key,  session token and access key id.
-4. Run ```aws configure``` again and provide the temporary credentials.
+3. Run ```aws configure``` again and provide the temporary credentials.
 
         aws configure --profile some_profile
         AWS Access Key ID [None]: <value from returned json>
@@ -95,14 +76,12 @@ Each profile is stored as a ini section in ```$HOME/.aws/config``` and ```$HOME/
         Default region name [None]: <whatever>
         Default output format [None]: <whatever>
 
-5. Edit ```$HOME/.aws/credentials``` and add the session token:
+4. Edit ```$HOME/.aws/credentials``` and add the session token:
 
         [some_profile]
         aws_acess_key_id = <value from returned json>
         aws_secret_access_key = <value from returned json>
         aws_session_token = <value from returned json>
-
-6. Now API calls using that profile will use the temporary credentials.
 
 ## Troubleshooting
 
