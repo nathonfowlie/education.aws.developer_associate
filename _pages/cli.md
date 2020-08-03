@@ -63,3 +63,10 @@ There's several ways to develop on AWS -
 | ```rb``` | Remove an empty bucket           | ```aws s3 rb asdf```                                     |
  
  + more...
+
+
+## STS Decode Errors
+
+Error messages can be decoded using the ```sts``` command.
+
+    aws sts decode-authorization-message --encoded-message <value>
