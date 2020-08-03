@@ -70,3 +70,43 @@ There's several ways to develop on AWS -
 Error messages can be decoded using the ```sts``` command.
 
     aws sts decode-authorization-message --encoded-message <value>
+
+## CLI Profiles
+
+1. Create/select a profile to configure
+
+        aws configure --profile some_name
+        ... configuration prompts here
+
+2. ```$HOME/.aws/config``` will contain an extra ini section for the new profile.
+3. To use the profile:
+    
+        aws s3 ls --profile some_profile some_command
+
+
+## Multi-factor Authentication
+
+1. Need to assign a MFA device in IAM to the user. Usual process:
+    a. Scan QR code.
+    b. Enter 2 consecutive codes.
+2. Create a temporary session
+
+        aws sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token --duration-seconds 3600
+
+3. Take not of the temporary access key,  session token and access key id.
+4. Run ```aws configure``` again and provide the temporary credentials.
+
+        aws configure --profile some_profile
+        AWS Access Key ID [None]: <value from returned json>
+        AWS Secret Access Key [None]: <value from returned json>
+        Default region name [None]: <whatever>
+        Default output format [None]: <whatever>
+
+5. Edit ```$HOME/.aws/credentials``` and add the session token:
+
+        [some_profile]
+        aws_acess_key_id = <value from returned json>
+        aws_secret_access_key = <value from returned json>
+        aws_session_token = <value from returned json>
+
+6. Now API calls using that profile will use the temporary credentials.
