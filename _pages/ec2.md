@@ -121,3 +121,9 @@ sidebar:
 - Billed by the second, with a minimum of 60seconds.
 - Don't pay for stopped instances.
 - Additional cost for storage, data transfer, public/private IPs, load balancing etc.
+
+## EC2 Instance Metadata
+
+- Allows EC2 instances to learn about themselves without needing to use an IAM role.
+- Accessed via ```HTTP GET http://169.254.169.254/[latest|<version>]/[dynamic|meta-data|user-data]```.
+- Can retrieve the IAM role name, but not the policy.
