@@ -52,3 +52,14 @@ There's several ways to develop on AWS -
 10. Set the role name and description
 11. Click next and finish.
 12. Attach the new IAM role to the EC2 instance.
+
+## S3 CLI
+
+| Command  | Description                      | Example                                                  |
+|----------|----------------------------------|----------------------------------------------------------|
+| ```ls``` | List buckets, or bucket contents | ```aws s3 ls ```, or ```aws s3 ls bucket_name```         |
+| ```cp``` | Copy a bucket object             | ```aws s3 cp s3://bucket_name/my_file.txt my_file.txt``` |
+| ```mb``` | Make a bucket                    | ```aws s3 mb asdf```                                     |
+| ```rb``` | Remove an empty bucket           | ```aws s3 rb asdf```                                     |
+ 
+ + more...
