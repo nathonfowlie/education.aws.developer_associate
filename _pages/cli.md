@@ -20,11 +20,7 @@ There's several ways to develop on AWS -
 - AWS SDK from EC2 instance
 - AWS Instance Metadata Server for EC2
 
-## CLI Troubleshooting
-
-- If you get the error ```aws: command found```, Check that the ```aws``` executable is on the PATH.
-
-## CLI Configuration
+## Configuration
 
 1. Open up IAM console and select the ```Security Credentials``` tab.
 2. Click ```Create access key```.
@@ -35,7 +31,7 @@ There's several ways to develop on AWS -
 7. Select the default output format (default is json if not specified).
 8. Config files are written to ```$HOME/.aws/config``` and ```$HOME/.aws/credentials```.
 
-### AWS CLI Configuration on EC2
+### Configuration on EC2
 
 - Use an IAM role, don't store credentials on the instance.
 - EC2 instances will use the profiles/roles automatically.
@@ -53,36 +49,30 @@ There's several ways to develop on AWS -
 11. Click next and finish.
 12. Attach the new IAM role to the EC2 instance.
 
-## S3 CLI
+## Credentials Provider Chain
 
-| Command  | Description                      | Example                                                  |
-|----------|----------------------------------|----------------------------------------------------------|
-| ```ls``` | List buckets, or bucket contents | ```aws s3 ls ```, or ```aws s3 ls bucket_name```         |
-| ```cp``` | Copy a bucket object             | ```aws s3 cp s3://bucket_name/my_file.txt my_file.txt``` |
-| ```mb``` | Make a bucket                    | ```aws s3 mb asdf```                                     |
-| ```rb``` | Remove an empty bucket           | ```aws s3 rb asdf```                                     |
- 
- + more...
+The CLI looks for credentials in the following order:
 
+1. Command line options (```--region```, ```--output```, and ```--profile```).
+2. Environment variables (```AWS_ACCESS_KEY_ID```, ```AWS_SECRET_ACCESS_KEY```, ```AWS_SESSION_TOKEN```).
+3. Credentials file (```$HOME/.aws/credentials```).
+4. Configuration file (```$HOME/.aws/config```).
+5. Container credentials (for ECS tasks).
+6. Instance profile credentials (for EC2 instance profiles).
 
-## STS Decode Errors
+## Managing Profiles
 
-Error messages can be decoded using the ```sts``` command.
+Additional profiles can be created to make it easy to switch between different accounts.
+Each profile is stored as a ini section in ```$HOME/.aws/config``` and ```$HOME/.aws/credentials```.
 
-    aws sts decode-authorization-message --encoded-message <value>
-
-## CLI Profiles
-
-1. Create/select a profile to configure
-
-        aws configure --profile some_name
-        ... configuration prompts here
-
-2. ```$HOME/.aws/config``` will contain an extra ini section for the new profile.
-3. To use the profile:
+    $ aws configure --profile some_name
+    AWS Access Key ID [None]: <some value>
+    AWS Secret Access Key [None]: <some value>
+    Default region name [None]: <some value>
+    Default output format [None]: <some value>
     
-        aws s3 ls --profile some_profile some_command
-
+    $ aws s3 ls --profile some_profile some_command
+    ...
 
 ## Multi-factor Authentication
 
@@ -111,14 +101,9 @@ Error messages can be decoded using the ```sts``` command.
 
 6. Now API calls using that profile will use the temporary credentials.
 
+## Troubleshooting
 
-## CLI Credentials Provider Chain
+- If you get the error ```aws: command found```, Check that the ```aws``` executable is on the PATH.
+- Authorization errors can be decoded  using STS
 
-The CLI looks for credentials in the following order:
-
-1. Command line options (```--region```, ```--output```, and ```--profile```).
-2. Environment variables (```AWS_ACCESS_KEY_ID```, ```AWS_SECRET_ACCESS_KEY```, ```AWS_SESSION_TOKEN```).
-3. Credentials file (```$HOME/.aws/credentials```).
-4. Configuration file (```$HOME/.aws/config```).
-5. Container credentials (for ECS tasks).
-6. Instance profile credentials (for EC2 instance profiles).
+        aws sts decode-authorization-message --encoded-message <value>
