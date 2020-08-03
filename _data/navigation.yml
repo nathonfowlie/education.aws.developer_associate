@@ -5,6 +5,8 @@ docs:
         url: /asg/
       - title: "Aurora"
         url: /aurora/
+      - title: "Databases"
+        url: /databases/
       - title: "EBS"
         url: /ebs/
       - title: "EC2"
