@@ -22,6 +22,9 @@ There's several ways to develop on AWS -
 
 ## Configuration
 
+
+### Local Environment
+
 1. Open up IAM console and select the ```Security Credentials``` tab.
 2. Click ```Create access key```.
 3. Save the details somewhere secure.
@@ -31,7 +34,7 @@ There's several ways to develop on AWS -
 7. Select the default output format (default is json if not specified).
 8. Config files are written to ```$HOME/.aws/config``` and ```$HOME/.aws/credentials```.
 
-### Configuration on EC2
+### EC2 Instance
 
 - Use an IAM role, don't store credentials on the instance.
 - EC2 instances will use the profiles/roles automatically.
@@ -74,7 +77,7 @@ Each profile is stored as a ini section in ```$HOME/.aws/config``` and ```$HOME/
     $ aws s3 ls --profile some_profile some_command
     ...
 
-## Multi-factor Authentication
+## Multi-factor Authentication (MFA)
 
 1. Need to assign a MFA device in IAM to the user. Usual process:
     a. Scan QR code.
