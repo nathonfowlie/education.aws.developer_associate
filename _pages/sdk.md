@@ -55,3 +55,21 @@ The SDK will look for credentials in the following order:
 3. Credentials file (```$HOME/.aws/credentials```).
 4. Container credentials (for ECS containers).
 5. Instance profile credentials (for EC2 instances).
+
+## Signing API Requests
+
+- The CLI and SDK sign HTTP requests for you using your credentials
+- For your own code, need to sign HTTP requests using Signature V4 (SigV4).
+- Example signed HTTP request using a HTTP header:
+
+        GET https://iam.amazonaws.com/?Action=ListUsers&Version=2010-05-08 HTTP/1.1
+        Authorization: AWS4-HMAC-SHA256 Credential=AKIDEXAMPLE/20150830/us-east-1/iam/aws3_request,SignedHeaders=content-type;host;x-amz-date,Signature=5d6722h3nm792y38o9y23o78rjmn2789ryoj23y23
+        content-type: application/x-www-form-urlencoded; charset=utf-8
+        host: iam.amazonaws.com
+        x-amz-date: 20150830T123600Z
+
+- Example signed HTTP request using a querystring:
+
+        GET https://iam.amazonaws.com/?Action=ListUsers&Version=2010-05-08&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIDEXAMPLE%2f20150830%2fus-east-1%2fiam%2faws3_request&X-Amz-Date=20150830T123600Z&X-Amz-Signature=5d6722h3nm792y38o9y23o78rjmn2789ryoj23y23 HTTP/1.1
+        content-type: application/x-www-form-urlencoded; charset=utf-8
+        host: iam.amazonaws.com
