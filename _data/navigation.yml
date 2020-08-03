@@ -1,6 +1,8 @@
 docs:
   - title: AWS Fundamentals
-    children:    
+    children:
+      - title: "AWS Certificate Manager (ACM)"
+        url: /acm/
       - title: "Auto-scaling Groups (ASG)"
         url: /asg/
       - title: "Aurora"
