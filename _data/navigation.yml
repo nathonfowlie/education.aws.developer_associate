@@ -23,6 +23,8 @@ docs:
         url: /route53/
       - title: "S3"
         url: /s3/
+      - title: "SES"
+        url: /ses/
       - title: "VPC"
         url: /vpc/
   - title: Developing on AWS
