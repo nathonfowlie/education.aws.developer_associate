@@ -33,6 +33,8 @@ docs:
         url: /vpc/
   - title: Developing on AWS
     children:
+      - title: "Athena"
+        url: /athena/
       - title: "Command Line Interface"
         url: /cli/
       - title: "AWS SDK"
