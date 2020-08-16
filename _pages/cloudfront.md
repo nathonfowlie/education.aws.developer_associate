@@ -26,7 +26,9 @@ toc_label: "Table of Contents"
 - Distribute files globally & cache them at the edge.
 - Better security via CloudFront Origin Access Identity (OAI).
 - Used as an ingress to upload S3 files.
-- Uses OAI + S3 Bucket policy.
+- Uses OAI + S3 Bucket policy. The OAI User ID is what gets inserted into the bucket policy.
+- Can restrict bucket access to force users to go through CloudFront.
+
 
 ### Custom (HTTP
 
