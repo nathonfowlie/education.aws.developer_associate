@@ -7,8 +7,6 @@ docs:
         url: /asg/
       - title: "Aurora"
         url: /aurora/
-      - title: "CloudFront"
-      - url: /cloudfront/
       - title: "Databases"
         url: /databases/
       - title: "EBS"
@@ -41,3 +39,7 @@ docs:
         url: /cli/
       - title: "AWS SDK"
         url: /sdk/
+      - title: "CloudFront"
+        url: /cloudfront/
+      - title: "ECS"
+        url: /ecs/
