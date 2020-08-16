@@ -7,6 +7,8 @@ docs:
         url: /asg/
       - title: "Aurora"
         url: /aurora/
+      - title: "CloudFront"
+      - url: /cloudfront/
       - title: "Databases"
         url: /databases/
       - title: "EBS"
