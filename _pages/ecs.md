@@ -105,18 +105,11 @@ toc_label: "Table of Contents"
 
 Multiple strategies can be mixed together. For example, spread the containers out across all availability zones, but binpack them together to maximum EC2 instance utilisation in each zone.
 
-#### Binpack
-
-- Place tasks based on least available amount of CPU or memory.
-- Minimises the number of instances used to save $$$.
-
-#### Random
-
-- Place the tasks randomly.
-
-#### Spread
-
-- Place tasks based on a specified value - instance id, availability zone etc.
+| strategy | description                                                                                                               |
+|----------|---------------------------------------------------------------------------------------------------------------------------|
+| binpack  | Places tasks based on the least available amount of CPU or memory, to maximise EC2 instance utilisation and reduce costs. |
+| random   | Places tasks randomly.                                                                                                    |
+| spread   | Place tasks based on a specified value - instance id, availability zone etc.                                              |
 
 ### Task Placement Contraints
 
