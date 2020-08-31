@@ -66,3 +66,61 @@ toc_label: "Table of Contents"
 
 - Uses statically defined host port mappings. One task per container instance.
 - Rule-based routing or paths not supported.
+
+## IAM Roles
+
+### AWS Service role for ECS
+
+- Allow the ECS service to create/manage resources (setup load balancers, route53 etc).
+
+### EC2 Instance Role
+
+- Allow EC2 instances in an ECS cluster to access ECS (register with load balancers etc).
+- Attached to EC2 instance(s).
+- Allows the ECS agent to function correctly (make API calls to the ECS service, send container logs to CloudWatch, and pull images from ECR).
+
+### ECS Service Role
+
+- Allows ECS to create and manage AWS resources (setup load balancers, route53 etc).
+
+### ECS Container Service Autoscaling Role
+
+- Allow auto-scaling to access and update ECS services.
+
+### ECS Service Task Role
+
+- Controls what resources the task can/can't access.
+
+## Task Placement & Constraints
+
+- Only for ECS using EC2. Fargate will figure it out for you.
+- Based on best effort only.
+- Uses the workflow -
+  1. Find instances that meet CPU, memory & port requirements in the task definition.
+  2. Find instances that meet task placement constraints.
+  3. Find instances that satisfy task placement strategies.
+  4. Selet the instance for task placement.
+
+### Task Placement Strategies
+
+Multiple strategies can be mixed together. For example, spread the containers out across all availability zones, but binpack them together to maximum EC2 instance utilisation in each zone.
+
+#### Binpack
+
+- Place tasks based on least available amount of CPU or memory.
+- Minimises the number of instances used to save $$$.
+
+#### Random
+
+- Place the tasks randomly.
+
+#### Spread
+
+- Place tasks based on a specified value - instance id, availability zone etc.
+
+### Task Placement Contraints
+
+| constraint       | description                                                                             |
+|------------------|-----------------------------------------------------------------------------------------|
+| distinctInstance | Place each task on a different container instance.                                      |
+| memberOf         | Place task on instances that satisfy an expression, using Cluster Query Language (CQL). |
