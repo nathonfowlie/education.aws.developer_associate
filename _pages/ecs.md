@@ -23,7 +23,8 @@ Three different flavours -
 ### ECS Classic
 
 - EC2 instances must be created.
-- Must configure /etc/ecs/ecs.config with the cluster name.
+- Must configure ECS_CLUSTER in /etc/ecs/ecs.config to provide the cluster name.
+- Must configure EC_ENABLE_TASK_IAM_ROLE in /etc/ecs/ecs.config to allow the ECS task to endorse an IAM role.
 - EC2 instances must run an ECS agent.
 - EC2 instance can run multiple containers of the same type, by NOT specifying a host port and using an ALB with dynamic port mapping.
 - EC2 instance needs to allow traffic from the ALB on all ports.
