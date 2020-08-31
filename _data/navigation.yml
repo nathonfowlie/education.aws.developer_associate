@@ -41,5 +41,7 @@ docs:
         url: /sdk/
       - title: "CloudFront"
         url: /cloudfront/
+      - title: "ECR"
+        url: /ecr/
       - title: "ECS"
         url: /ecs/
