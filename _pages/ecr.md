@@ -16,6 +16,7 @@ toc_label: "Table of Contents"
 - Access controlled via IAM policy.
 - Can enable tag immutability to prevent tags being over-written.
 - Can scan images the moment that they're pushed to the registry.
+- ECS cluster instances need an IAM role that allows docker images to be pulled from ECR.
 
 ## CLI authentication
 
