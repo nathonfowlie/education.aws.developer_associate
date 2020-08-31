@@ -117,3 +117,19 @@ Multiple strategies can be mixed together. For example, spread the containers ou
 |------------------|-----------------------------------------------------------------------------------------|
 | distinctInstance | Place each task on a different container instance.                                      |
 | memberOf         | Place task on instances that satisfy an expression, using Cluster Query Language (CQL). |
+
+## Service Auto-scaling
+
+- Different to EC2 auto-scaling.
+- Fargate auto-scaling is way easier.
+
+| Scaling method    | Description                               |
+| TargetTracking    | Scale based on average CloudWatch metric. |
+| Step Scaling      | Scale based on CloudWatch alarms.         |
+| Scheduled Scaling | Scale based on predictable changes.       |
+
+## Cluster Capacity Provider
+
+- Will provision infrastructure for you (scale EC2 instances, ECS task instances and Fargate instances).
+- The FARGATE and FARGATE_SPOT capacity providers are added automatically of ECS and Fargate users.
+- For Amazon ECS on EC2, the capacity provider needs to be associated with an auto-scaling group.
