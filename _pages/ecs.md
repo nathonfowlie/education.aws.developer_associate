@@ -10,6 +10,26 @@ toc_icon: "book-reader"
 toc_label: "Table of Contents"
 ---
 
+## Overview
+
+Three different flavours -
+
+| Flavour     | Description                                   |
+|-------------|-----------------------------------------------|
+| ECS Classic | Provision EC2 instances to run containers on. |
+| Fargate     | Serverless.                                   |
+| EKS         | Managed Kubernetes by AWS.                    |
+
+### ECS Classic
+
+- EC2 instances must be created.
+- Must configure /etc/ecs/ecs.config with the cluster name.
+- EC2 instances must run an ECS agent.
+- EC2 instance can run multiple containers of the same type, by NOT specifying a host port and using an ALB with dynamic port mapping.
+- EC2 instance needs to allow traffic from the ALB on all ports.
+- ECS tasks must have IAM roles to execute actions against AWS.
+- Security groups operate at the instance level, not the task level.
+
 ## ECS Clusters
 
 - Logical grouping of EC2 instances.
