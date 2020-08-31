@@ -45,3 +45,5 @@ docs:
         url: /ecr/
       - title: "ECS"
         url: /ecs/
+      - title: "Fargate"
+        url: /fargate/
