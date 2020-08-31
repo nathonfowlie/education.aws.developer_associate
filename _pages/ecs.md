@@ -153,3 +153,9 @@ Multiple strategies can be mixed together. For example, spread the containers ou
 - Will provision infrastructure for you (scale EC2 instances, ECS task instances and Fargate instances).
 - The FARGATE and FARGATE_SPOT capacity providers are added automatically of ECS and Fargate users.
 - For Amazon ECS on EC2, the capacity provider needs to be associated with an auto-scaling group.
+
+## ECS Logging
+
+- CloudWatch logging is defined in the task definition.
+- Different log stream per container.
+- EC2 instance profile needs the right IAM permissions to talk to CloudWatch.
