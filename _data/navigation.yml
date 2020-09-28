@@ -41,6 +41,8 @@ docs:
         url: /sdk/
       - title: "CloudFront"
         url: /cloudfront/
+      - title: "Elastic Beanstalk"
+        url: /elasticbeanstalk/
       - title: "ECR"
         url: /ecr/
       - title: "ECS"
