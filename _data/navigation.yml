@@ -31,6 +31,18 @@ docs:
         url: /ses/
       - title: "VPC"
         url: /vpc/
+  - title: "CI/CD"
+    children:
+      - title: "CodeCommit"
+        url: /codecommit/
+      - title: "CodePipeline"
+        url: /codepipeline/
+      - title: "CodeBuild"
+        url: /codebuild/
+      - title: "CodeDeploy"
+        url: /codedeploy/
+      - title: "CodeStar"
+        url: /codestar/
   - title: "Developing on AWS"
     children:
       - title: "Athena"
@@ -49,15 +61,3 @@ docs:
         url: /ecs/
       - title: "Fargate"
         url: /fargate/
-  - title: "CI/CD"
-    children:
-      - title: "CodeCommit"
-        url: /codecommit/
-      - title: "CodePipeline"
-        url: /codepipeline/
-      - title: "CodeBuild"
-        url: /codebuild/
-      - title: "CodeDeploy"
-        url: /codedeploy/
-      - title: "CodeStar"
-        url: /codestar/
