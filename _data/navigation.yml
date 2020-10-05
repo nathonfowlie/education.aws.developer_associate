@@ -35,6 +35,18 @@ docs:
     children:
       - title: "Athena"
         url: /athena/
+      - title: "CI/CD"
+        children:
+          - title: "CodeCommit"
+            url: /codecommit/
+          - title: "CodePipeline"
+            url: /codepipeline/
+          - title: "CodeBuild"
+            url: /codebuild/
+          - title: "CodeDeploy"
+            url: /codedeploy/
+          - title: "CodeStar"
+            url: /codestar/
       - title: "Command Line Interface"
         url: /cli/
       - title: "AWS SDK"
