@@ -1,5 +1,5 @@
 docs:
-  - title: AWS Fundamentals
+  - title: "AWS Fundamentals"
     children:
       - title: "AWS Certificate Manager (ACM)"
         url: /acm/
@@ -31,7 +31,7 @@ docs:
         url: /ses/
       - title: "VPC"
         url: /vpc/
-  - title: Developing on AWS
+  - title: "Developing on AWS"
     children:
       - title: "Athena"
         url: /athena/
