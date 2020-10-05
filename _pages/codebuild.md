@@ -72,3 +72,9 @@ toc_label: "Table of Contents"
 
 - Uses docker.
 - Need to install the CodeBuild Agent.
+
+## CodeBuild in VPCs
+
+- By default, containers are built outside of the VPC, and can't access VPC resources.
+- Specify a VPC ID, subnet ids, security group ids etc in order to access them.
+- Public VPCs can't (shouldn't) have an internet connection. Use a private subnet with 0.0.0.0/0 destination as the target NAT gateway.
