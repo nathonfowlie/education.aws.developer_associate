@@ -51,6 +51,8 @@ docs:
         url: /cli/
       - title: "AWS SDK"
         url: /sdk/
+      - title: "CloudFormation"
+        url: /cloudformation/
       - title: "CloudFront"
         url: /cloudfront/
       - title: "Elastic Beanstalk"
