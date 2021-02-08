@@ -63,3 +63,5 @@ docs:
         url: /ecs/
       - title: "Fargate"
         url: /fargate/
+      - title: "STS"
+        url: /sts/
