@@ -36,8 +36,30 @@ Integrates corporate user respositories via SAML (LDAP etc).
 
 ## IAM Policies
 
-- Inline policies are specific to a single role.
-- Policies can be versioned.
+- AWS Managed policies are managed by AWS. Good for power users & administrators. They get updated when there's changes to AWS services, or new services made available.
+- Customer Managed policies are re-usable against many principals. They're version controlled, support rollback, and have central change management.
+- Inline policies apply to a single principal. No version control, no rollback, deleted if the IAM principal is deleted, and limited to 2KB.
+- IAM policies apply to users, roles and groups.
+- S3 policies apply to specific buckets.
+- S3 bucket permissions are based on the union of the IAM policy(s) and S3 policy(s).
+
+### Policy Evaluation Order
+
+1. If there's an explicit DENY, deny access.
+2. If there's an explicit ALLOW, allow access.
+3. Otherwise, deny access.
+
+### Dynamic Policies
+
+Policy variables can be used to insert dynamic information (ie:```${aws:username}```).
+
+```
+{
+    "Sid": "AllowAllS3ActionsInUserFolder",
+    "Action": ["s3:*"],
+    "Effect": "Allow",
+    "Resource": ["arn:aws:s3:::my-company/home/${aws:username}/*"]
+```
 
 ### Creating a Policy
 
@@ -58,6 +80,52 @@ Via the visual editor -
 7. Click ```Create Policy```.
 8. Select a role.
 9. Attach the policy to the role.
+
+### Granting User Permissions to pass a role to an AWS Service
+
+- AWS Services must be passed a role in order to configure them. They'll assume this role to perform actions.
+- Requires the ```iam:PassRole``` permission.
+- Usually used in combination with ```iam:GetRole``` to view the role being passed.
+- Roles can only be passed to what their ```Trust``` allows.
+- A ```trust policy``` defines which service is allowed to assume a role.
+
+#### Example role passing policy
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::123456789012:role/S3Access"
+    }
+  ]
+}
+```
+
+#### Example trust policy
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Sid": "TrustPolicyStatementThatAllowsEC2ServiceToAssumeTheAttachedRole",
+    "Effect": "Allow",
+    "Principal": {
+      "Service": "ec2.amazonaws.com"
+    },
+    "Action": "sts:AssumeRole"
+  }
+}
+```
 
 ### AWS Policy Simulator
 
