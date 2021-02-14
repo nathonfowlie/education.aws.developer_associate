@@ -69,3 +69,5 @@ docs:
         url: /ds/
       - title: "Step Functions"
         url: /stepfunctions/
+      - title: "AppSync"
+        url: /appsync/
