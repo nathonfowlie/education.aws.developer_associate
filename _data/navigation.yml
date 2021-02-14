@@ -67,3 +67,5 @@ docs:
         url: /sts/
       - title: "Directory Services"
         url: /ds/
+      - title: "Step Functions"
+        url: /stepfunctions/
