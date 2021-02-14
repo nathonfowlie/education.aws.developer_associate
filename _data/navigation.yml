@@ -65,3 +65,5 @@ docs:
         url: /fargate/
       - title: "STS"
         url: /sts/
+      - title: "Directory Services"
+        url: /ds/
