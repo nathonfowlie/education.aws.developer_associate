@@ -16,7 +16,7 @@ toc_label: "Table of Contents"
 - GraphQL makes it easy to perform data queries.
 - Can combine data from multiple sources: NoSQL, RDS, HTTP  APIs.
 - Integrates with DynamoDB, Aurora, Elasticsearch, Lambda etc.
-- Retrieve real-time data with WebSockets or MQTT on WebSocket.
+- Retrieve real-time data with WebSockets or MQTT on WebSocket (AppSync, Application Load Balancer, API Gateway).
 - Local data access and data sync for mobile apps (offline sync).
 - Uses resolvers to communicate with data sources.
 - Integrated with CloudWatch metrics & logs.
