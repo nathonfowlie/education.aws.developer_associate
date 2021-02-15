@@ -71,3 +71,5 @@ docs:
         url: /stepfunctions/
       - title: "AppSync"
         url: /appsync/
+      - title: "CloudWatch"
+        url: /cloudwatch/
