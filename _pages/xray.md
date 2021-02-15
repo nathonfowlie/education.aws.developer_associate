@@ -31,6 +31,7 @@ toc_label: "Table of Contents"
   - Queue calls (SQS).
 - Need to install the X-Ray daemon (low level UDP packet interceptor), or enable X-Ray AWS integration (Lambda etc).
 - Application needs IAM rights to write data to X-Ray.
+- To enable on Elastic Beanstalk, use ```.ebextensions/xray-daemon.config```.
 
 ## X-Ray Troubleshooting
 
