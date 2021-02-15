@@ -17,11 +17,7 @@ toc_label: "Table of Contents"
 - Dimensions are attributes of a metric (instance id, environment etc).
 - Max 10 dimensions per metric.
 - Metrics have timestamps.
-- Alarms can trigger notifications for any metric.
-- Alarms can be attached to Auto Scaling, EC2 actions, SNS notifications.
-- Alarms can be based on sample, percentage, max, min etc).
-- Alarms states are OK, INSUFFICIENT_DATA, ALARM.
-- Alarm periods are the time window used to evaluate the metric.
+- EC2 metrics by default cover disk, CPU and network (at a high level). No RAM.
 
 ## EC2 Detailed Monitoring
 
@@ -37,4 +33,57 @@ toc_label: "Table of Contents"
 - Enable high-resolution custom metrics (```StorageResolution``` API parameter) to set granularity up to 1second.
 - High resolution metrics only allow 10sec or 30sec for the alarm period.
 - Use ```PutMetricData``` to send a custom metric to CloudWatch.
-- Use expontential backoff in case of throttle errors.
+- Use exponential backoff in case of throttle errors.
+
+## CloudWatch Alarms
+
+- Alarms can trigger notifications for any metric.
+- Alarms action can trigger Auto Scaling action, EC2 action, or SNS notification.
+- Alarms can be based on sample count, percentage, max, min etc).
+- Alarms states are OK, INSUFFICIENT_DATA, ALARM.
+- Alarm periods are the time window used to evaluate the metric.
+- Missing data can be treated as good (threshold not breached), bad (threshold breached), ignore (don't change alarm state) or missing.
+
+## CloudWatch Logs
+
+- Applications can send logs to CloudWatch via the SDK.
+- Logs can be collected from Elastic Beanstalk, ECS, AWS Lambda, VPC Flows, API Gateway, CloudTrail based on a filter, CloudWatch log agents, Route53 etc.
+- Logs can be sent to CloudWatch, S3 for archiving, streaming to ElasticSearch for analytics.
+- Supports filter expressions for searching.
+- Log group is a name, usually represents the application.
+- Log stream is instances within the application/log files/containers.
+- Log expiration policy used for data retention (never expire, 30 days etc).
+- Logs can be tailed using the AWS CLI.
+- Make sure IAM permissions are correct to send logs.
+- Logs can be encrypted using KMS at the Group level.
+- Can use a Lambda subscription filter, or an ElasticSearch subscription filter to send logs to Lambda/ElasticSearch for further analysis.
+
+## CloudWatch Agent
+
+- Need to run the CloudWatch Agent to send logs from EC2 instances to CloudWatch.
+- Requires an IAM role to allow logs to be sent to CloudWatch.
+- CloudWatch Agent can run on-prem as well.
+
+### CloudWatch Logs Agent
+
+- Old version of the agent that can only send to CloudWatch logs.
+
+### CloudWatch Unified Agent
+
+- New version of the CloudWatch Agent.
+- Can collect metrics like CPU, disk metrics, RAM, Netstat, processes, swap space.
+- Can collect logs to send to CloudWatch logs.
+- Can use centralized configuration using SSM parameter store to manage the agent.
+
+### CloudWatch Logs Metric Filter
+
+- Filter expressiones to search logs.
+- Can trigger alarms.
+- Filters don't retroactively filter data. Only public metric data points for events that occure after the filter was created.
+
+## CloudWatch Events
+
+- Can be scheduled via a cronjob.
+- Can use an event pattern to react to a service doing something (eg: CodePipeline state changed).
+- Triggers Lambda functions, SQS/SNS/Kinesis messages, CodeBuild, CodePipeline, Firehose, ECS task, EC2 TerminateInstance API call etc.
+- Creates a JSON document with some information about the change.
