@@ -73,3 +73,5 @@ docs:
         url: /appsync/
       - title: "CloudWatch"
         url: /cloudwatch/
+      - title: "X-Ray"
+        url: /xray/
