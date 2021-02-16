@@ -75,3 +75,5 @@ docs:
         url: /cloudwatch/
       - title: "X-Ray"
         url: /xray/
+      - title: "CloudTrail"
+        url: /cloudtrail/
