@@ -14,7 +14,7 @@ toc_label: "Table of Contents"
 
 - Simple Queue Service.
 
-## Standard Queue
+## SQS - Standard Queue
 
 - Oldest offering.
 - Fully managed.
@@ -29,12 +29,12 @@ toc_label: "Table of Contents"
 - Messages can be out of order (best effort ordering).
 - Once message has been put back into the queue a certain number of times, it can be moved to the Dead Letter Queue.
 
-## Producers
+### Producers
 
 - Send messages to a SQS queue using the ```SendMessage``` API.
 - Message is persisted until a consumer deletes it.
 
-## Consumers
+### Consumers
 
 - Poll message queues, process the messages, and deleted them off the queue.
 - Running on EC2,Lambda or on-prem infrastructure.
@@ -44,13 +44,13 @@ toc_label: "Table of Contents"
 - Horizontal scaling to increase message throughput.
 - CloudWatch metric is available called ```Queue Length```, which can be used to increase/decrease the capacity of the ASG based on the volume of messages.
 
-## Security
+### Security
 
 - Encryption during transit using HTTPS (enabled by default).
 - Encryption at rest using KMS.
 - Client-side encryption is supported.
 
-### Access Policies
+#### Access Policies
 
 - Similar to S3 bucket policies.
 - Useful for cross-account access or allowing other services to write to a SQS queue.
@@ -87,11 +87,11 @@ toc_label: "Table of Contents"
 - Enabled at the Queue level, or at the API level using ```WaitTimeSeconds```.
 - Should be preferred to short polling.
 
-## SQS Extended Client
+### SQS Extended Client
 
 - Java library that uses an S3 bucket too store large messages, to work-around the 256KB size limit.
 
-## Important APIs
+### Important APIs
 
 | API                                 | Description                                                                              |
 |-------------------------------------|------------------------------------------------------------------------------------------|
@@ -105,6 +105,8 @@ toc_label: "Table of Contents"
 | ```ChangeMessageVisibility```       | Change the message timeout.                                                              |
 
 - ```SendMesage```, ```DeleteMessage``` and ```ChangeMessageVisibility``` have batch APIs to help decrease costs.
+
+## SQS - FIFO Queue
 
 
 
