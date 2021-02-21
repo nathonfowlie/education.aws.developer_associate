@@ -81,3 +81,5 @@ docs:
         children:
           - title: "SQS"
             url: /sqs/
+          - title: "SNS"
+            url: /sns/
