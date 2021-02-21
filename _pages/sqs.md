@@ -108,8 +108,22 @@ toc_label: "Table of Contents"
 
 ## SQS - FIFO Queue
 
+- Messages are processed by the consumer in the order they arrived.
+- Max throughput is 300 messages/sec, or 3000 messages/sec with batching.
+- Exactly-once send capability (removes duplicates).
+- Each message needs to specify its group ID, and provide a token (deduplication ID) used for de-duplication.
 
+### Deduplication
 
+- De-duplication interval is 5mins. If the same message is sent multiple times within 5mins, the duplicates will be deleted.
 
+#### Deduplication Methods
 
+- Content-based deduplication: Based on the SHA256 hash of the message body.
+- Explicitly provide a message deduplication id.
 
+### Message Grouping
+
+- If ```MessageGroupID``` has the same value in a FIFO queue, you can only have one consumer, and all the messages are processed in order.
+- If different ```MessageGroupID``` values are provided, you can group a subset of messages. Each Group ID can have a different consumer to support parallel processing.
+- Ordering across groups isn't guaranteed.
