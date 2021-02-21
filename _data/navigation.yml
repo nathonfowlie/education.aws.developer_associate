@@ -77,9 +77,9 @@ docs:
         url: /xray/
       - title: "CloudTrail"
         url: /cloudtrail/
-    - title: "Messaging"
-      children:
-        - title: "SQS"
-          url: /sqs/
-        - title: "SNS"
-          url: /sns/
+  - title: "Messaging"
+    children:
+      - title: "SQS"
+        url: /sqs/
+      - title: "SNS"
+        url: /sns/
