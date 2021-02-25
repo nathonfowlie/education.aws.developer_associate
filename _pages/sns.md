@@ -22,6 +22,15 @@ toc_label: "Table of Contents"
 - Subscribers can be SQS, HTTP/HTTPS, Lambda, Email, SMS messages or Mobile notifications.
 - Most AWS services can send data to SNS for notifications.
 
+### Subscription Protocols
+
+- HTTP
+- HTTPS
+- Email
+- Email-JSON
+- Amazon SQS
+- Amazone Lambda
+
 ## Publishing
 
 ### Topic Publish (Using the SDK)
@@ -52,3 +61,16 @@ toc_label: "Table of Contents"
 - IAM policies regulat access to the SNS API.
 - SNS Access Policies, similar to S3 Bucket Policies for cross-account access to SNS topips, or allowing other service to write to an SNS topic.
 
+## SNS + SQS Fan Out Pattern
+
+- Push a message to SNS, and it will be recieved by all SQS queues that are subscribers.
+- Fully de-coupled, no data loss.
+- SQS allows data persistence, delayed processing and retries of work.
+- Easy to add more SQS subscribers over time. Useful for micro-services.
+- SQS Queue accesspolicy needs to allow SNS to write.
+- SNS can't send messages to SQS FIFO queues.
+
+## S3 Events to Multiple Queues
+
+- Can only have on S3 Event rule for the same event type (eg: object create) & prefix (eg: images).
+- Use Fan-out pattern to send the same S3 event to many SQS queues.
