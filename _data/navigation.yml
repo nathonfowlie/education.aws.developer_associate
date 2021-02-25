@@ -83,3 +83,5 @@ docs:
         url: /sqs/
       - title: "SNS"
         url: /sns/
+      - title: "Kinesis"
+        url: /kinesis/
