@@ -85,3 +85,7 @@ docs:
         url: /sns/
       - title: "Kinesis"
         url: /kinesis/
+  - title: "Identity Management"
+    children:
+      - title: "Cognito"
+        url: /cognito/
