@@ -115,3 +115,58 @@ toc_label: "Table of Contents"
 - Supports alot of data formats. There's a conversion fee to convert between formats.
 - Pay for the amount of data going through Firehose.
 
+## SQS vs SNS vs Kinesis
+
+### SQS
+
+- Consumers pull data.
+- Data is deleted once consumed.
+- Can have as many consumers as you want.
+- Throughput isn't provisioned.
+- Ordering is not guaranteed unless you use a FIFO queue.
+- Messages can be delayed if required.
+
+### SNS
+
+- Data is pushed to subscribers (pub/sub model).
+- Up to 10m subscribers.
+- Data is not persisted, it's lost if it isn't delivered.
+- Up to 10,000 topics.
+- Throughput is not provisioned.
+- Integrates with SQS for fan-out architecture.
+
+### Kinesis
+
+- Consumers pull data.
+- Can have as many consumers are you want.
+- Data can be replayed.
+- Meant for real-time big data, analytics and ETL.
+- Records within the shard are ordered according to partition key.
+- Data expires after X days.
+- Throughput is provisioned.
+
+## Kinesis Data Ordering vs SQS FIFO Queue
+
+- Use the partition key to  control the order of messages in a Kinesis Stream.
+- The same partition key will always go to the same shard in a Kinesis Stream.
+- SQS standard isn't ordered at all.
+- SQS FIFO messages without a group id will be consumed by a single consumer in the order they're sent.
+- SQS FIFO messages with a group id, will be consumed by multiple consumers (one consumer per group, messages processed in the order they arrive for that group. Very similar to a Kinesis partition key).
+
+### Example
+
+There are 100 trucks sending GPS data, 5 kinesis shards and 1 SQS FIFO.
+
+#### Kinesis Data Stream
+
+- On average, 20 trucks per shard (x 5 shards).
+- Data is ordered within each shard.
+- Maximum of 5 consumers (one per shard).
+- Up to 5MB/s of data (1MB/s per shard).
+
+#### SQS FIFO
+
+- 100 Group IDs (one per truck).
+- Data is ordered within each group id (or in the order they arrive into the queue if no group id).
+- Maximum of 100 consumers (one per Group ID).
+- Up to 300 messages/second, or 3,000 if using batching.
