@@ -77,7 +77,41 @@ toc_label: "Table of Contents"
 - Can use the SDK, CLI or Kinesis Client Library.
 - Kinesis Client Library uses DynamoDB to checkpoint offsets, track other workers, and share the work amongst available shards.
 - Pass the shart iterator to ```get records --shard-iterator``` to retrieve the messages for a given shard id.
-- 
 
+## Kinesis Client Library (KCL)
 
+- Java library for distributed applications that helps read records from Kinesis Streams, to share the read workload across multiple nodes.
+- Each shard can only be ready by one KCL instance. ie: if there's 4 shards, the maximum number of KCL instances is 4.
+- DynamoDB is used to checkpoint progress and co-ordinate consumption of shards across the KCL instances (requires IAM access to write to DynamoDB).
+- KCL can run on EC2, Elastic Beanstalk, On-Prem applications etc.
+- Record are read in the order that they were placed into the shard.
+
+## Security
+
+- IAM policies to control access/authorization.
+- VPC endpoints are available to allow access to Kinesis from within a VPC.
+
+### Encryption 
+
+- Encryption in transit via HTTPS.
+- Encryption at rest using KMS
+- Possible to use client side encryption.
+
+## Kinesis Data Analytics
+
+- Real-time analytics on Kinsesis Streams using SQL.
+- Auto-scales.
+- Fully managed, no services to provision.
+- Continuous analytics (real time).
+- Pay for actual consumption.
+- Create streams out of real-time queries.
+
+## Kinesis Firehose
+
+- Fully managed, no administration.
+- Near real time (60 seconds delay).
+- Used for ETLs. Load data into Redshift/S3/ElasticSearch/Splunk.
+- Automatic scaling.
+- Supports alot of data formats. There's a conversion fee to convert between formats.
+- Pay for the amount of data going through Firehose.
 
