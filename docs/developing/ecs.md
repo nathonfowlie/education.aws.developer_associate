@@ -62,6 +62,29 @@ Three different flavours -
 - Have to create the load balancer before configuring the service.
 - The security group used by the clusters EC2 instances, needs an inbound rule that permits all traffic on any port, coming from the ALB security group. This will allow the load balancer to forward traffic via the dynamically mapped ports.
 
+## ECS Data Volumes
+
+### Task Strategies
+
+#### Shared EBS Volume
+
+- Share an EBS volume between EC2 instances.
+- Allows the docker containers to mount the EBS volume and increases storage capacity of the task.
+- If the task moves to another EC2 instance in another availability zone, it won't have the same EBS volume/data.
+
+#### Shared EFS Volume
+
+- Share an EFS volume between EC2 instances.
+- Same EFS volume can mounted on tasks in any availability zone.
+- Persistent, multi-AZ storage for containers.
+- Fargate+EFS allows for data storage without the need for servers.
+
+#### Bind Mounts
+
+- Use local EC2 instance storage for EC2 Tasks, or Fargate tasks (4G storage).
+- Useful to store ephemeral data on the same task.
+- Good for side-car pattern. Container A writes application logs to storage, Container B ingests the logs/metrics and forwards them to Splunk/Prometheus etc.
+
 ### ALB
 
 - Uses dynamic port forwarding to forward to the task instances running in swarm mode.
