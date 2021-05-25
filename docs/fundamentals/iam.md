@@ -15,14 +15,17 @@
 - Activate MFA.
 - Create an IAM user.
 - Create a group to allocate permissions.
+- Never store AWS credentials in code (duh). Use the credentials chain
+- Use IAM roles as much as possible within AWS.
+- Use environment variables or a named profile when working outside of AWS.
 
 ## IAM Federation
 
 Integrates corporate user respositories via SAML (LDAP etc).
 
-## Roles
+## IAM Roles
 
-- One role per application.
+- Common roles are EC2 instance roles, Lambda Function roles and CloudFormation roles.
 
 ## IAM Policies
 
@@ -43,7 +46,7 @@ Integrates corporate user respositories via SAML (LDAP etc).
 
 Policy variables can be used to insert dynamic information (ie:```${aws:username}```).
 
-```
+``` json
 {
     "Sid": "AllowAllS3ActionsInUserFolder",
     "Action": ["s3:*"],
@@ -81,7 +84,7 @@ Via the visual editor -
 
 #### Example role passing policy
 
-```
+``` json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -103,7 +106,7 @@ Via the visual editor -
 
 #### Example trust policy
 
-```
+``` json
 {
   "Version": "2012-10-17",
   "Statement": {
@@ -117,6 +120,18 @@ Via the visual editor -
 }
 ```
 
+## IAM Security Tools
+
+### IAM Credentials Report
+
+- Account level.
+- Lists the users in an account and the status of their credentials.
+
+### IAM Access Advisor
+
+- User level.
+- Service permissions granted to a user, and when the services were last accessed.
+
 ### AWS Policy Simulator
 
 - Online tool to test IAM policies.
@@ -129,10 +144,15 @@ Via the visual editor -
 
 Use the ```--dry-run``` arg to validate permissions without creating resources. For example:
 
-    aws ec2 run-instances --dry-run --image-id ami-06340c8c12baa6a09 --instance-type t2.micro
+``` shell
+$ aws ec2 run-instances --dry-run --image-id ami-06340c8c12baa6a09 --instance-type t2.micro
+```
 
-## Best Practise
+## CloudShell
 
-- Never store AWS credentials in code (duh). Use the credentials chain
-- Use IAM roles as much as possible within AWS.
-- Use environment variables or a named profile when working outside of AWS.
+- Access from the management console.
+- Default region is the region that you're logged into within the console.
+- Files created within CloudShell are persisted.
+- Can download/upload files.
+- Supports multiple tabs (shells).
+- Only available in some regions.
