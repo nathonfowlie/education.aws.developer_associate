@@ -69,10 +69,11 @@
 - Failover to secondary site when healthcheck fails.
 - Can only have one primary, and one secondary record (duh).
 
-### Geo Location Routing Policy
+### GeoProximity Routing Policy
 
 - Routed based on user location.
 - Need to have a default policy for users in a location that doesn't have an explicit policy.
+- Increase/decrease bias value to control how much traffic is sent to each region based on where the user is.
 
 ### Multi-value Routing Policy
 
