@@ -1,0 +1,10 @@
+site_name: AWS Developer Associate 2021
+site_description: 'Study notes for the AWS Developer Associate 2021 Certification'
+site_author: 'Nathon FOwlie'
+docs_dir: docs/
+repo_name: 'mhausenblas/mkdocs-template'
+repo_url: 'https://github.com/mhausenblas/mkdocs-template'
+nav:
+    - Home: index.md
+theme:
+  name: 'material'
