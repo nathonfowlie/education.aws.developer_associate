@@ -34,6 +34,15 @@
 - Control the maintenance & updates of AMIs over time.
 - Optimised for a specific purpose.
 
+## Instance Types
+
+| Type                  | Use Case                                                                                                               |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------|
+| General Purpose       | Balance between compute, memory & networking. Web servers, code repos etc.                                             |
+| Compute Optimised     | Compute intensive workloads. Batch jobs, transcoding, machine learning, gaming servers etc.                            |
+| Memory Optimised      | Workloads processing large datasets. Databases, web cache stores, BI, realtime processing of unstructured data.        |
+| Storage Optimised     | Workloads needing high IO. Databases, transaction processing, redis cache, distributed file systems, data warehousing. |
+
 ## Security Groups
 
 - Provide access to ports.
@@ -47,6 +56,8 @@
 - All outbound traffic is permitted by default.
 - Security groups can reference another security group for defining inbound/outbound rules (SG1 is allowed to connect to EC2 instances assigned SG2, but SG3 isn't).
 - Generally a good idea to keep a seperate SSH security group as it's commonly required.
+- Contain ALLOW rules only.
+- Timeout errors mean it's a security group problem. Connection refused means it's an application error/EC2 instance isn't launched.
 
 ## EC2 User Data
 
@@ -90,15 +101,15 @@
   - Once burst credits are exhausted, performance will absolutely tank.
 - T2 has unlimited burst credits, but it costs money if the burst credit limit is exceeded.
 
-| Launch Type | Description | Good For | Committment |
-|-------------|-------------|----------|-------------|
-| On Demmand  | Predictable pricing.<br/><br/>Billed by the second, with a minimum of 60seconds.<br/><br/>- No upfront payment.<br/><br/>- Highest hourly cost of all the instance launch types. | Short, un-interrupted workloads | None |
-| Reserved | Upto 75% cheaper than On-Demand instances.<br/><br/>Pay upfront.<br/><br/>Must specify the specific instance type to be reserved (SKU). | Long workloads, or steady state applications (database etc). | 1 - 3 years |
+| Launch Type          | Description | Good For | Committment |
+|----------------------|-------------|----------|-------------|
+| On Demmand           | Predictable pricing.<br/><br/>Billed by the second, with a minimum of 60seconds.<br/><br/>- No upfront payment.<br/><br/>- Highest hourly cost of all the instance launch types. | Short, un-interrupted workloads | None |
+| Reserved             | Upto 75% cheaper than On-Demand instances.<br/><br/>Pay upfront.<br/><br/>Must specify the specific instance type to be reserved (SKU). | Long workloads, or steady state applications (database etc). | 1 - 3 years |
 | Convertible Reserved | Upto 54% cheaper than On-Demand instances.<br/><br/>Instance type can be changed.<br/><br/>No upfront payment. | Long workloads | 1 - 3 years |
-| Scheduled Reserved | | A workload needs to be performed within a specific time window (9am-5pm Mon-Fri etc). | 1 year |
+| Scheduled Reserved   | | A workload needs to be performed within a specific time window (9am-5pm Mon-Fri etc). | 1 year |
 | Spot | Spot instance is given to the higest bidder. If someone bids more, then you can lose the instance with zero notice.<br/><br/>Four types - Load balancing (web services), Flexible (batch, ci/cd), Big data (any size, any AZ) and Defined duration (1-6hrs)<br/><br/>90% cheaper than On-Demand instances. | Short workloads - batch jobs, data analysis, image processing, things that are resilient to failure. |
-| Dedicated Instance | Runs on hardware that is dedicated to a specific account.<br/><br/>Hardware may be shared with other EC2 instances within the same account.<br/><br/>Can only move hardware after the EC2 instance is stopped.<br/><br/>Pay upfront.<br/><br/>Per instance billing. | | None |
-  | Dedicated Hosts | Reserve a physical server<br/><br/>Per instance billing<br/><br/>Provides visibility of the underlying sockets and hardware, such as physical cores.<br/><br/>User has full control over the instance placement.<br/><br/>Expensive | Companies with strong compliance/regulatory requirements, or for bring-your-own-license models where the license is bound to the number of cores. | 3 years |
+| Dedicated Instance   | Runs on hardware that is dedicated to a specific account.<br/><br/>Hardware may be shared with other EC2 instances within the same account.<br/><br/>Can only move hardware after the EC2 instance is stopped.<br/><br/>Pay upfront.<br/><br/>Per instance billing. | | None |
+  | Dedicated Hosts    | Reserve a physical server<br/><br/>Per instance billing<br/><br/>Provides visibility of the underlying sockets and hardware, such as physical cores.<br/><br/>User has full control over the instance placement.<br/><br/>Expensive | Companies with strong compliance/regulatory requirements, or for bring-your-own-license models where the license is bound to the number of cores. | 3 years |
 
 ## Pricing
 
