@@ -69,6 +69,20 @@ Client => HTTP GET /foo.jpg => Edge Location => S3 Bucket/HTTP (if not cached) =
   - Trusted signers (which AWS accounts can create signed URLs)
 - Signed URL gives access to a specific file.
 - Signed Cookie gives access to many files.
+- Private key is used by applications to sign the URLs.
+- Public key is used by CloudFront to verify the URLs.
+
+### Trusted Key Group
+
+- The recommended way to sign.
+- Assigned to a CloudFront distribution.
+- Contains one or more public keys so CloudFront can verify the URLs.
+- Can use APIs to manage/rotate the keys.
+
+### CloudFront Key Pair
+
+- An AWS account that has the CloudFront Key Pair can also be used for signing.
+- Avoid because the root account is needed to manage the keys, and there's no API available.
 
 ## CloudFront Signed URL vs S3 Pre-signed URL
 
@@ -84,3 +98,28 @@ Client => HTTP GET /foo.jpg => Edge Location => S3 Bucket/HTTP (if not cached) =
 - Issue a request as the person who pre-signed the URL.
 - Uses the IAM key of the signing IAM principal.
 - Limited lifetime.
+
+## Price Classes
+
+| Class           | Description                                                |
+|-----------------|------------------------------------------------------------|
+| Price Class All | Best performance, most expensive, uses all edge locations. |
+| Price Class 200 | Excludes the most expensive regions.                       |
+| Price Class 100 | Only uses the cheapest regions.                            |
+
+## Multiple Origin Routes
+
+- Route to different origins based on the content type. For example, API calls go to the ALB, static content goes to an S3 bucket.
+
+## Origin Groups
+
+- Increases HA and ability to do failover.
+- Has one primary, and one secondary origin.
+- Can use S3 buckets to enable region-level H/A (retrieve from secondary bucket in another region if the first bucket returns an error).
+
+## Field Level Encryption
+
+- Protects sensitive user information.
+- Information is encrypted at the edge close to the user.
+- Up to 10 fields in the request can be encrypted.
+- 
