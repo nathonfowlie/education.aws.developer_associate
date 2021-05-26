@@ -166,3 +166,7 @@
 - Create/update/delete stacks across multiple accounts/regions in a single operation.
 - Requires administration account to create them.
 - Trusted accounts can create, update or delete stack instances from StackSets.
+
+## Drift
+
+- Detect manual changes made to resources provisioned by the Cloudformation stack.
