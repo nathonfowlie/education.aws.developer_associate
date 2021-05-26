@@ -34,6 +34,27 @@
 - Support encryption at rest and during transit.
 - Can specify a backup window.
 
+### Cluster Modes
+
+#### Disabled
+
+- Each shard has 1 primary node used for read/write, and up to 5 replicas.
+- Asynchronous replication.
+- Additional nodes are used for read only (read replicas).
+- All nodes have all of the data if there's only 1 shard. This guards against data loss on  node failure.
+- Multi-AZ fail over enabled by default.
+- Good for scaling read performance.
+
+#### Enabled
+
+- Data partitioned across many shards (scales writes).
+- Each shard has 1 primary node, and upto 5 replica nodes.
+- Multi-AZ fail over enabled by default.
+- Up to 500 nodes per cluster,
+    - 500 shards with 1 master.
+    - 250 shards with 1 master and 1 replica.
+    - 83 shards with 1 master and 5 replicas.
+
 ## Memcached
 
 - Multi-node data partitioning (sharding).
