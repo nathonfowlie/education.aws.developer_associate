@@ -2,14 +2,16 @@
 
 ## Overview
 
-- Host public SSL certificates in AWS.
-  - BYO and upload using the CLI or
-  - Have ACM provision and renew the SSL certs (free).
-- Can manage private certificates as well.
+Service used to host public SSL certificates in AWS.
+
+Private certificates can also be managed, and you can upload existing certificates via the cli.
+
+???+ note Note
+    Certificates provisioned via ACM are free.
 
 ## Integration
 
-Can load certs onto:
+ACM certificates can be loaded onto
 
 - Load Balancers (including ones created by Elastic Beanstalk).
 - Cloudfront distributions.

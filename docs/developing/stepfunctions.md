@@ -2,13 +2,25 @@
 
 ## Overview
 
+- Model workflows as state machines.
 - Serverless workflows to orchestrate lamba functions.
-- Flow is represented as a JSON state machine.
 - Support sequence, parallel, conditions, timeouts, error handling.
 - Integrates with EC2, EC2, On-Prem Servers, API gateway etc.
 - Maximum execution time is 1 year.
 - Supports human/manual approval feature.
 - Useful for order fulfillment, data processing (ETL), web applications (payment processing).
+
+### States
+
+| State        | Description                                                                                                                   |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Task         | Do some work. Invoke an AWS service, run an activity. Activity will poll the step function for work, and return the results.  |
+| Choice       | Test for a condition to send to a branch.                                                                                     |
+| Fail/Succeed | Stop execution with fail/success.                                                                                             |
+| Pass         | Pass input to an output, or inject some fixed data without doing any work.                                                    |
+| Wait         | Wait until a specified date/time, or delay for an amount of time.                                                             |
+| Map          | Dynamically iterate over steps.                                                                                               |
+| Parallel     | Being parallel branches of execution.                                                                                         |
 
 ## Error Handling
 
