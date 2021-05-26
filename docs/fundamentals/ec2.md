@@ -21,7 +21,7 @@
 
 - Base image.
 - EC2 User Data can be used to customise the image.
-- AMIs are bound to a specific region.
+- AMIs are bound to a specific region, but can be copied across regions.
 
 ### Why use a Custom AMI?
 
@@ -33,6 +33,10 @@
 - Security concerns (need more control of the image).
 - Control the maintenance & updates of AMIs over time.
 - Optimised for a specific purpose.
+
+### Building AMIs
+
+- Start an EC2 instance, customise, stop it, and create an AMI using the stopped instance.
 
 ## Instance Types
 
@@ -128,3 +132,15 @@
 - Allows EC2 instances to learn about themselves without needing to use an IAM role.
 - Accessed via ```HTTP GET http://169.254.169.254/[latest|<version>]/[dynamic|meta-data|user-data]```.
 - Can retrieve the IAM role name, but not the policy.
+
+## EC2 Instance Store
+
+- Instance stores are ephemeral storage.
+- Physically attached to the machine.
+- Provides better IO performance (up to millions on IOPS).
+- Good for buffering/caching/scratch data/temporary content.. Data survives reboots.
+- Instance store is lost on termination and can't be resized. Backups need to be operated by the user.
+- Up to 7.5TB, striped them to reach 30TB.
+- Viewed on the instance as block storage.
+- Risk of data loss if hardware fails.
+- Some instances don't come with root EBS volumes.

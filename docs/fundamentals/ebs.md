@@ -2,14 +2,14 @@
 
 ## What's an EBS Volume?
 
-- An EC2 machine loses its root volume when it's manually terminated.
 - EBS is a network attached volume to persist data.
 - Can be de-ttached and re-attached to another EC2 instance in the same AZ.
-- To move volumes between AZs, need to take a snapshot first.
-- Have provisioned capacity (IOPS, and volume size).
+- Bound to an AZ.
+- Capacity must be provisioned in advance (IOPS, and volume size).
 - Billed for all provisioned capacity, even if it's not used.
 - Capacity can be increased as needed.
 - Only GP2 and IO1 can be used as boot volumes.
+- Enable "Delete on Termination" to delete the EBS volume when the EC2 instance is terminated. By default it's enabled on the root volume.
 
 ## EBS Attributes
 
@@ -19,21 +19,24 @@
 
 ## EBS Volume Types
 
-| Volume Type | Optimised for                 | Boot Volume | Uses                                                                                                                                  | Size       | IOPS                                                                       |
+| Volume Type     | Optimised for                 | Boot Volume | Uses                                                                                                                                  | Size       | IOPS                                                                       |
 |-------------|-------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------|------------|----------------------------------------------------------------------------|
-| GP2 (SSD)   | Balance price vs performance. | Yes         | General purpose.<br/>Low latency interactive apps<br/>Virtual desktops<br/>Dev/Test environments<br/>Recommended for most workloads.  | 1GB-16TB   | 3 IOPS/TB<br/>Minimum 100 IOPS with burst to 3000. Maximum 16,000 IOPS.    |
-| IO1 (SSD)   | Provisioned IOPS              | Yes         | Large workloads & critical business applications - DB servers etc.<br/>Highest performance SSD.<br/>Expensive.                        | 4GB-16TB   | 50IOPS/GB<br/>Minimum 100 IOPS, upto 32,000. Or 64,00 with Nitro instance. |
-| ST1 (HDD)   | Streaming workloads           | No          | Kafka, data warehouses, log processing. Low cost.                                                                                     | 500GB-16GB | Maximum 500 IOPS<br/>Maximum 500MB/sec through-put.                        |
-| SC1 (HDD)   | Infrequently accessed data    | No          | Cheapest. Good for cold backups, snapshots.                                                                                           | 500GB-16GB | Maximum 250GB/sec with burst.                                              |
+| GP2 (SSD)   | Balance price vs performance. | Yes         | General purpose.<br/>Low latency interactive apps<br/>Virtual desktops<br/>Dev/Test environments<br/>Recommended for most workloads.  | 1GB-16TB   | 3 IOPS/GB<br/>Minimum 100 IOPS with burst to 3000. Maximum 16,000 IOPS.<br/>IOPS scales with volume size.    |
+| GP3 (SSD)   | Balance price vs performance. | Yes         | General purpose.<br/>Low latency interactive apps<br/>Virtual desktops<br/>Dev/Test environments<br/>Recommended for most workloads.  | 1GB-16TB   | Minimum 3,000 IOPS and 125MB/s. Maximum 16,000 IOPS and/or 1000MB/s.    |
+| IO1/IO2 (SSD)   | High performance SSD          | Yes         | Large workloads & critical business applications - DB servers etc.<br/>Highest performance SSD.<br/>Expensive.<br/>IO2 should be preferred over IO1 because it gets more IOPS/GB, and more durability. | 4GB-16TB   | 50IOPS/GB<br/>Minimum 100 IOPS, upto 32,000. Or 64,00 with Nitro instance.<br/>Supports EBS multi-attach. |
+| IO2 Block Express (SSD)   | High performance SSD          | Yes         | Large workloads & critical business applications - DB servers etc.<br/>Highest performance SSD.<br/>Expensive.<br/>Sub millisecond latency.<br/>Supports EBS multi-attach. | 4GB-64TB   | 1,000IOPS/GB, upto 256,000 IOPS |
+| ST1 (HDD)       | Frequently accessed, throughput intensive workloads. | No          | Kafka<br/>Data warehouses<br/>Log processing<br/>Low cost. | 125MB-16TB | Maximum 500 IOPS<br/>Maximum 500MB/sec through-put.                        |
+| SC1 (HDD)   | Infrequently accessed data        | No          | Cheapest. Good for cold backups, snapshots. | 125MB-16TB | Maximum 250MB/sec throughput with 250 IOPS.                                              |
 
-## Instance Store
+## EBS Snapshots
 
-- Some instances don't come with root EBS volumes.
-- Instance stores are ephemeral storage.
-- Physically attached to the machine.
-- Provides better IO performance (up to millions on IOPS).
-- Good for buffering/caching/scratch data/temporary content.. Data survives reboots.
-- Instance store is lost on termination and can't be resized. Backups need to be operated by the user.
-- Up to 7.5TB, striped them to reach 30TB.
-- Viewed on the instance as block storage.
-- Risk of data loss if hardware fails.
+- Can be copied across regions/AZs.
+- Don't necessarily have to detach the volume to take a snapshot.
+- Can create a new volume from a snapshot.
+
+## EBS Multi Attach
+
+- Attach same EBS volume to multiple EC2 instances in the same AZ.
+- Good for clustered applications (eg: teradata).
+- Must use a cluster aware file system.
+- Only for IO1 or IO2.

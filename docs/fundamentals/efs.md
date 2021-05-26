@@ -1,4 +1,4 @@
-# Elastic File System
+  # Elastic File System
 
 ## What is Elastic File System (EFS)?
 
@@ -10,12 +10,6 @@
 - Uses NFSv4.1.
 - Uses security groups to control access.
 - Only compatible with linux.
-- Encryption at rest with KMS keys.
-- Thousands of concurrent clients, with 10GB/sec throughput.
-- Can grow to PB scale file systems.
-- Performance mode is set at creation time.
-  - General purpose (default): latency sensitive use cases (web servers etc).
-  - Max IO: higher latency, highly parallel (big data, media processing).
 - Can use lifecycle management to remove files after a number of days.
 - Throughput mode has two options
   - Bursting
@@ -51,3 +45,44 @@
 - io1 can increase IO independantly of disk size.
 - To migrate EBS volume across AZ, take a snapshot, and restore into the new AZ. Uses alot of IO.
 - EBS will be terminated by default when the instance is terminated (can be turned off).
+
+## Encryption
+
+- Encryption at rest using KMS keys.
+
+## Scaling
+
+- Supports thousands of concurrent clients.
+- Upto 10GB/sec throughput.
+- Can grow to PB scale file systems.
+- Performance mode is set at creation time.
+
+### Performance Mode
+
+#### General Purpose (default)
+
+- Use for latency sensitive use cases (web servers etc).
+
+#### Max I/O
+
+- Higher latency.
+- Use for highly parallel workloads (big data, media processing).
+
+### Throughput Mode
+
+#### Bursting
+
+- 50MB/sec per TB, up to 100MB/sec bursts.
+
+#### Provisioned
+
+- Define throughput seperately from storage size.
+- Max 1GB/sec throughput.
+
+## Storage Tiers
+
+| Tier                   | Use Case                                      |
+|------------------------|-----------------------------------------------|
+| Standard               | For frequently accessed files.                |
+| Infrequent Access (IA) | Cost to retrieve files, lower price to store. |
+
