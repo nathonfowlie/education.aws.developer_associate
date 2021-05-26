@@ -106,7 +106,7 @@
 
 - TCP/UDP/TLS traffic (Layer 4).
 - Handle millions of TPS.
-- Less latency (100ms vs 400mb of ALB).
+- Less latency (100ms vs 400ms of ALB).
 - One static IP per AZ.
 - Supports assigned Elastic IPs.
 - Used for extreme performance, and TCP/UDP level traffic.
