@@ -24,17 +24,116 @@
 
 ## Error Handling
 
-- Task failures,machine definition issues (no matching rule etc), transient issues (network partition event).
-- Default behaviour is to fail the entire execution if a state reports an error.
-- There's three ways to retry execution when an error is encountered:
-  - Retry: IntervalSecond (wait a set number of seconds and try again)
-  - Retry: MaxAttempts (retry immediately and give up after X attempts)
-  - Retry: BackoffRate (wait an exponentially increasing amount of time before trying again)
-- To continue on failure, use
-  - Catch: ErrorEquals
-  - Catch: Next
-- Include data in error messages to help with troubleshooting.
+The default failure behaviour is to fail the entire execution if a state reports an error.
 
+An error can occur due to:
+
+  - Task failures.
+  - Machine definition issues (no matching rule etc).
+  - Transient issues (network partition event).
+
+Try to include data in the error messages to help with troubleshooting.
+
+### Pre-defined Error Codes
+
+There's four pre-defined error codes that can be returned -
+
+| Error Code         | Description                                                      |
+|--------------------|------------------------------------------------------------------|
+| States.ALL         | Catch all errors that occur inside the lambda function.          |
+| States.Timeout     | Task ran longer than TimeoutSeconds, or no heartbeat received.   |
+| States.TaskFailed  | Execution failure.                                               |
+| States.Permissions | Insufficient privileges to execute the code.                     |
+
+### Retrying
+
+Applies to tasks, or parallel state. A task can use multiple retry methods that are evaluated in
+order.
+
+There's several parameters that can be used to modify how often a retry is attempted, how many
+times to retry before giving up, and a back off rate to increase the interval between each
+subsequent retry.
+
+| Method         | Description                                                          |
+|----------------|----------------------------------------------------------------------|
+| IntervalSecond | Wait a set number of seconds and try again.                          |
+| MaxAttempts    | Retry immediately and give up after X attempts (default is 3).       |
+| BackoffRate    | Wait an exponentially increasing amount of time before trying again. |
+
+
+???+ example "Example"
+        ``` json
+        "HelloWorld": {
+          "Type": "Task",
+          "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+          "Retry": [
+            {
+              "ErrorEquals": ["CustomError"],
+              "IntervalSeconds": 1,
+              "MaxAttempts": 2,
+              "BackoffRate": 2.0
+            },
+            {
+              "ErrorEquals": ["States.TaskFailed"],
+              "IntervalSeconds": 30,
+              "MaxAttempts": 2,
+              "BackoffRate": 2.0
+            },
+            {
+              "ErrorEquals": ["States.ALL"],
+              "IntervalSeconds": 5,
+              "MaxAttempts": 5,
+              "BackoffRate": 2.0
+            }
+          ],
+          "End": true
+        }
+        ```
+
+### Catching Errors
+
+Applies to Tasks or parallel steps, and has two attributes to control what errors to catch,
+what the next step should be, and what to include in the result
+
+| Attribute   | Description                                                 |
+|-------------|-------------------------------------------------------------|
+| ErrorEquals | Match a specific type of error.                             |
+| Next        | Proceed to next step.                                       |
+| ResultPath  | Way to include the input, into the output of the next task. |
+
+???+ example "Example"
+        ``` json
+        "HelloWorld": {
+          "Type": "Task",
+          "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+          "Catch": [
+            {
+              "ErrorEquals": ["CustomError"],
+              "Next": "CustomErrorCallback"
+            },
+            {
+              "ErrorEquals": ["States.TaskFailed"],
+              "Next": "ReservedTypeCallback"
+            },
+            {
+              "ErrorEquals": ["States.ALL"],
+              "Next": "NextTask",
+              "ResultPath": "$.error"
+            }
+          ],
+          "End": true
+        },
+        "NextTask": {
+          "Type": "Pass",
+          "Result": "This is a fallback from a reserved error code.",
+          "End": true
+        },
+        "CustomErrorFallback": {
+          "Type": "Pass",
+          "Result": "This is a fallback from a custom lambda function exception.",
+          "End": true
+        }
+        ```
 
 ### Standard Step Functions
 
