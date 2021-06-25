@@ -6,6 +6,9 @@ extra:
       link: https://www.linkedin.com/in/nathonfowlie/
       name: LinkedIn
 
+extra_css:
+  - css/extra.css
+
 extra_javascript:
   - https://unpkg.com/mermaid/dist/mermaid.min.js
 
@@ -40,53 +43,11 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - 'Fundamentals':
-      - 'AWS Certificate Manager': fundamentals/acm.md
-      - 'Auto-scaling Groups': fundamentals/asg.md
-      - 'Aurora': fundamentals/aurora.md
-      - 'Databases': fundamentals/databases.md
-      - 'EBS': fundamentals/ebs.md
-      - 'EC2': fundamentals/ec2.md
-      - 'ElastiCache': fundamentals/elasticache.md
-      - 'Elastic File System': fundamentals/efs.md
-      - 'Elastic Load Balancers': fundamentals/elb.md
-      - 'Identity & Access Management': fundamentals/iam.md
-      - 'Relational Database Service': fundamentals/rds.md
-      - 'Route53': fundamentals/route53.md
-      - 'S3': fundamentals/s3.md
-      - 'SES': fundamentals/ses.md
-      - 'VPC': fundamentals/vpc.md
-  - 'CI/CD':
-      - 'CodeCommit': cicd/codecommit.md
-      - 'CodePipeline': cicd/codepipeline.md
-      - 'CodeBuild': cicd/codebuild.md
-      - 'CodeDeploy': cicd/codedeploy.md
-      - 'CodeStar': cicd/codestar.md
-  - 'Developing on AWS':
-      - 'Athena': developing/athena.md
-      - 'Command Line Interface': developing/cli.md
-      - 'AWS SDK': developing/sdk.md
-      - 'CloudFormation': developing/cloudformation.md
-      - 'CloudFront': developing/cloudfront.md
-      - 'Elastic Beanstalk': developing/elasticbeanstalk.md
-      - 'ECR': developing/ecr.md
-      - 'ECS': developing/ecs.md
-      - 'Fargate': developing/fargate.md
-      - 'STS': developing/sts.md
-      - 'Directory Services': developing/ds.md
-      - 'Step Functions': developing/stepfunctions.md
-      - 'AppSync': developing/appsync.md
-      - 'CloudWatch': developing/cloudwatch.md
-      - 'X-Ray': developing/xray.md
-      - 'CloudTrail': developing/cloudtrail.md
-  - 'Messaging':
-      - 'SQS': messaging/sqs.md
-      - 'SNS': messaging/sns.md
-      - 'Kinesis': messaging/kinesis.md
-  - 'Identity Management':
-      - 'Cognito': identitymanagement/cognito.md
+  - ...
 
 plugins:
+  - awesome-pages:
+      collapse_single_pages: true
   - search:
       prebuild_index: true
   - macros
@@ -103,10 +64,7 @@ site_name: AWS Developer Associate 2021
 
 theme:
   features:
-    - navigation.expand
     - navigation.instant
-      #- navigation.sections
-    - navigation.tabs
     - navigation.top
     - search.suggest
     - toc.integrate
