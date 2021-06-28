@@ -48,6 +48,8 @@ nav:
 plugins:
   - awesome-pages:
       collapse_single_pages: true
+  - git-revision-date-localized:
+      type: date
   - search:
       prebuild_index: true
   - macros
