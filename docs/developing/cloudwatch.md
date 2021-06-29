@@ -45,7 +45,7 @@
 - Log expiration policy used for data retention (never expire, 30 days etc).
 - Logs can be tailed using the AWS CLI.
 - Make sure IAM permissions are correct to send logs.
-- Logs can be encrypted using KMS at the Group level.
+- Logs can be encrypted using KMS at the Group level (use ```associate-cmk-key``` and ```create-log-group``` in the API).
 - Can use a Lambda subscription filter, or an ElasticSearch subscription filter to send logs to Lambda/ElasticSearch for further analysis.
 
 ## CloudWatch Agent

@@ -13,6 +13,7 @@
 - Build metrics can be captured.
 - S3 buckets can be used as a temporary cache for build dependencies to improve build times.
 - Needs an IAM service role to get permission to perform actions against AWS API/resources.
+- Provide a VPC configuration to access VPC resources from CodeBuild.
 
 ## Supported Environments
 
@@ -32,6 +33,7 @@
 - IAM for build permissions.
 - VPC for network security.
 - CloudTrail for API call auditing.
+- Reference SSM parameters/Secrets Manager secrets in environment variables.
 
 ## Notifications
 

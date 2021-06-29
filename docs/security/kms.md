@@ -1,7 +1,6 @@
 # AWS Key Management Service (KMS)
 
-Managed key management service.
-
+- Managed key management service.
 - Integrated with IAM for authorization.
 - Integrated into most AWS services that need to use encryption.
 - Can be used to create, enable/disable keys, or configure rotation policies.
@@ -22,9 +21,9 @@ Managed key management service.
 
 The CMK used to encrypt/decrypt data can't be retrieved by the user. There's 3 types of CMKs -
 
-1) AWS Managed Service (free)
-2) User created keys ($1/month)
-3) Import keys ($1/month)
+1. AWS Managed Service (free).
+2. User created keys ($1/month).
+3. Import keys ($1/month).
 
 ### Symmetric (AES265) Keys
 
