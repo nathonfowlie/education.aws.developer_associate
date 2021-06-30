@@ -100,6 +100,7 @@
 - A new ASG will be created with identical settings to the existing ASG. 
 - Can choose how long to keep the old instances.
 - Must be using an ELB.
+- Full control over deployment steps.
 
 
 ## Rollbacks

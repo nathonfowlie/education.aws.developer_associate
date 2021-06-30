@@ -84,6 +84,7 @@ Three different flavours -
 - Use local EC2 instance storage for EC2 Tasks, or Fargate tasks (4G storage).
 - Useful to store ephemeral data on the same task.
 - Good for side-car pattern. Container A writes application logs to storage, Container B ingests the logs/metrics and forwards them to Splunk/Prometheus etc.
+- ALB access logs will contain information about latency, URLs, status codes and client IPs.
 
 ### ALB
 

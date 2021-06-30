@@ -9,6 +9,11 @@
 - Provides a deployment strategy.
 - Developer only responsible for application code.
 - Has a rollback feature to rollback to previous application version.
+- By default doesn't persist storage.
+- Self-signed certificate used for HTTPS if a custom domain isn't purchased.
+- Supports TCP pass-through.
+- Store SSL private keys on S3 and download them from there.
+- If doing HTTP to HTTPS redirect, ensure the health check can still run over HTTP.
 
 ### Three Architectural Models
 
@@ -18,9 +23,52 @@
 
 ### Three Components
 
-- Application
-- Application Version. Gets deployed into and promoted between environments.
-- Environment Name
+#### Application
+
+- Collection of Elastic Beanstalk components (environments, versions, environment configurations).
+
+#### Application Version
+
+- Tag that points to an S3 object containing the deployable code (war file etc).
+
+#### Environment
+
+- Collection of AWS resources running an application version.
+- Elastic Beanstalk will provision the AWS resources needed to run the application version (EC2 instances, ASG etc).
+- Use ```Environment Links``` to split components between multiple environments, and link them together to share information.
+- Uses Route53 to generate the environments CNAME.
+- Does SSL termination at the load balancer by default, but can be configured to use SSL all the way to the EC2 instance.
+- Use ACM, or IAM to distribute SSL certificate.
+- Add a HTTPS listener under .ebextensions/securelistener-[clb|alb|nlb].config.
+
+##### Worker Environment Tier
+
+- Uses SQS to pass off long-running tasks to a back-end.
+- Scheduled tasks can be setup using cron.
+- Failed tasks will be re-queued after the ```ErrorVisibilityTimeout``` period.
+- Unresponsive tasks will be re-queued after the ```InactivityTimeout``` period.
+- Supports Dead Letter Queues.
+- Auto-scales via CloudWatch.
+- Use ```MaxRetries``` to limit how many times the message is re-queued.
+
+##### Web Environment Tier
+
+- Front-end handling incoming requests (ie: web server).
+- Requests come into the web environment tier, put tasks in an SQS queue, which will read the tasks from the
+  SQS queue.
+
+### Container Type
+
+- Defines the infrastructure toplogy, and software stack running on the EC2 instances. eg: LAMP, Tomcat.
+
+### Host Manager
+
+- Runs on each EC2 instance.
+- Deploy the application.
+- Aggregates events/metrics.
+- Monitors application logs for errors.
+- Patches components.
+- Handles log rotation and logging to S3.
 
 ### Environment Lifecycle
 
@@ -29,9 +77,12 @@
 3. Upload an application version (+ alias)
 4. Release to environments.
 
+![ELB Workflow](../images/elb_workflow.png)
+
 ### Supported Languages
 
-- Go, Java, Tomcat, .NET, NOdeJS, PHP, Python, Ruby, Packer, Docker (Single/Multi container), Preconfigured Docker, custom platform.
+- Go, Java, Tomcat, .NET, NOdeJS, PHP, Python, Ruby, Packer, Docker (Single/Multi container),
+  Preconfigured Docker, custom platform.
 
 ## Deployment Modes
 
@@ -45,7 +96,7 @@
 - Good for production.
 - Multi-AZ, multiple EC2 instances, multiple ASGs, multi-AZ RDS etc.
 
-## Deployment modes for Updates
+## Deployment Policies
 
 ### All at once
 
@@ -61,7 +112,8 @@
 
 ### Rolling with additional batches
 
-- Similar to rolling, but spins up new instances to move the batch (spin up X new instances, wait till healthy, discard X old instances, move on to the next batch).
+- Similar to rolling, but spins up new instances to move the batch (spin up X new instances, wait
+  till healthy, discard X old instances, move on to the next batch).
 - Application always runs at full capacity.
 - Can control the bucket size.
 - Both versions of the application are running at the same time for a period of time.
@@ -70,12 +122,19 @@
 
 ### Immutable
 
-- Spins up new instances in a new (temporary) ASG, and once they're healthy, moves the instances into the current ASG. Once health checks pass, the old instances are released.
+- Spins up new instances in a new (temporary) ASG, and once they're healthy, moves the instances 
+  into the current ASG. Once health checks pass, the old instances are released.
 - High cost because you're running at double capacity for a while.
 - Has the longest deployment time.
 - Enables fast rollback by terminating the new ASG.
 - Good for production.
 - No downtime.
+
+### Traffic Splitting
+
+- Perform canary testing as part of the deployment.
+- Spins up new instances similar to an Immutable Deployment, then sends a percentage of traffic to 
+  the new instances for a specific amount of time. If health checks pass, all traffic is migrated. If health check fails, canaries are terminated, and traffic is sent back to the original instances.
 
 ### Blue/Green
 
@@ -83,7 +142,8 @@
 - Zero downtime
 - Create a new environment, and deploy the new version there.
 - Can use Route53 to setup weighted policies to move some load over.
-- Using Beanstalk, you'd swap the URLs once environment testing is finished (does a CNAME update via Route53)
+- Using Beanstalk, you'd swap the URLs once environment testing is finished (does a CNAME update
+  via Route53)
 - Is a very manual process
 
 ## Elastic Beanstalk CLI
@@ -106,7 +166,8 @@
 - Package code as a zip file
 - Upload zip to Elastic Beanstalk to create the app version.
 - Deploy the new app version to an environment.
-- Elastic Beanstalk will deploy the zip to the EC2 instances, resolve dependencies & start the application.
+- Elastic Beanstalk will deploy the zip to the EC2 instances, resolve dependencies & start the
+  application.
 
 ## Elastic Beanstalk Lifecycle Policy
 
@@ -115,7 +176,8 @@
 - Can be based on time (days), or space (number of versions).
 - Versions in active use won't be deleted.
 - There's an option to not delete the source bundle in S3 to prevent data loss.
-- Need to specify the IAM role that allows Elastic Beanstalk to remove the old application version & associated files.
+- Need to specify the IAM role that allows Elastic Beanstalk to remove the old application version
+  & associated files.
 
 ## Elastic Beanstalk Extensions
 
@@ -141,7 +203,8 @@
 
 ### Loadbalancer
 
-- Create a new environment, with the same configure, but without the Load Balancer (can't use clone).
+- Create a new environment, with the same configure, but without the Load Balancer (can't use
+  clone).
 - Deploy the application into the new environment.
 - Do a CNAME swap/Route53 to swap the environments.
 
@@ -184,15 +247,16 @@
 - Configure ALB to do the redirect.
 - Make sure health checks aren't redirected.
 
-## Web Server vs Worker Environments
-
-- Long running tasks should be offloaded to a dedicated worker environment.
-- Define the periodic tasks in cron.yaml.
-- Requests come into the web tier, put tasks in an SQS queue, which will read the tasks from the SQS queue.
-
 ## Custom Platform
 
 - Define from scratch OS, additional software and scripts that run.
 - Only use case is when the application language doesn't use docker or is incompatible with EB.
 - Use platform.yaml to define the AMI.
 - Use packer to generate the AMI.
+
+## Monitoring
+
+- Monitor CPU/Network utilization, response time, total request count via the Elastic Beanstalk console.
+- ELB and EC2 instance metrics are enabled for all environments (sent every 5mins).
+- Enabled ```Enhanced Health``` to get additional metrics, such as severity of the health problem. Also enables the ```Health``` page. Metrics are sent every 10secs.
+- Health agent runs on each EC2 instance to monitor web server logs and system metrics.

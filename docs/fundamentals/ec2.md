@@ -96,8 +96,9 @@
 ## EC2 Instance Launch Types
 
 - Use reserved instance type for base application, and On-Demand/Spot instance types to handle peaks.
+- Zonal reserved instance is bound to an AZ and can be used for capacity reservations.
+- Regional reserved instances don't provide capacity reservations.
 - Five main attributes - RAM, CPU, Memory, IO, Network, GPU.
-- There's over 50 of the damned things.
 - The letter represents the launch types specialty. C = cpu optimised, R = memory optmised etc.
 - M instance types are all-rounders. Medium performance.
 - T2/T3 instance types are burstable, based on burst credits.

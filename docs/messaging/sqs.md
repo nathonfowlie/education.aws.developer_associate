@@ -3,21 +3,18 @@
 ## Overview
 
 - Simple Queue Service.
+- Two queue types - Standard, and FIFO.
 
 ## SQS - Standard Queue
 
-- Oldest offering.
 - Fully managed.
-- Used to decouple applications.
-- Unlimited throughput.
-- Unlimited number of messages in queue.
-- Default message retention period is 4 days.
-- Maximum message retention period is 14 days.
+- Use to decouple applications.
+- Unlimited throughput & queue size.
+- Default message retention period is 4 days, maximum is 14 days.
 - Low latency (< 10ms public and recieve).
-- Message size limit of 256KB.
-- Possible to have duplicate messages (delivered at least once).
-- Messages can be out of order (best effort ordering).
-- Once message has been put back into the queue a certain number of times, it can be moved to the Dead Letter Queue.
+- 256KB message size limit.
+- Messages can be duplicated, and be delivered out of order (delivered at least once, best effort ordering).
+- After a message has been re-queued multiple times, it can be moved to the Dead Letter Queue (DLQ).
 
 ### Producers
 
@@ -44,6 +41,8 @@
 
 - Similar to S3 bucket policies.
 - Useful for cross-account access or allowing other services to write to a SQS queue.
+
+![SQS Queue Notifications](../images/sqs_queue_notifications.png)
 
 ### Message Visibility Timeout
 

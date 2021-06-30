@@ -110,7 +110,7 @@
             
 ## Conditions
 
-- Control the creation of resources/outputs.
+- Control the creation of resources/outputs (not parameters).
 - If dev, if test etc.
 - And, Equals, If, Not, Or
 
@@ -125,16 +125,15 @@
 
 ## Instrinsic Functions
 
-| Function                              | Sample                                               | Notes                                                                                                     |
-|---------------------------------------|------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| Function                              | Sample                                               | Notes                                               |
+|---------------------------------------|------------------------------------------------------|-----------------------------------------------------|
 | Ref                                   | ```!Ref EC2Instance```                               | If referencing a parameter, returns the param value. If referencing a resources, returns the resource id) |
-| GetAtt                                | ```!GetAtt EC2Instance.AvailabilityZone```           | Get the attributes of a resource.                  | 
-| FindInMap                             | ```!FindInMap [RegionMap, !Ref "AWS::Region", 32]``` | Get a name value using a key.                      |
+| GetAtt                                | ```!GetAtt EC2Instance.AvailabilityZone```           | Get the attributes of a resource.                   | 
+| FindInMap                             | ```!FindInMap [RegionMap, !Ref "AWS::Region", 32]``` | Get a name value using a key.                       |
 | ImportValue                           | ```!ImportValue SSHSecurityGroup```                  | Import values that are exported in other templates. |
-| Join                                  |  ```!Join [ ";", [ a, b, c ] ]``` | Join values using a delimiter. |
-| Sub                                   | ```!Sub String``` | Substitute values in strings. |
-| Conditions (If, Not, Equals, And, Or) | ```!And, !If, !Not, !Or, !Equals``` | Logical operations. |
-
+| Join                                  |  ```!Join [ ";", [ a, b, c ] ]```                    | Join values using a delimiter.                      |
+| Sub                                   | ```!Sub String```                                    | Substitute values in strings.                       |
+| Conditions (If, Not, Equals, And, Or) | ```!And, !If, !Not, !Or, !Equals```                  | Logical operations.                                 |
 
 ## Rollbacks
 

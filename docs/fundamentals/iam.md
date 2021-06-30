@@ -36,6 +36,17 @@ Integrates corporate user respositories via SAML (LDAP etc).
 - S3 policies apply to specific buckets.
 - S3 bucket permissions are based on the union of the IAM policy(s) and S3 policy(s).
 
+### Policy Types
+
+| Type                                      | Description                                                                                       |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------|
+| Identity-based                            | Managed/inline policies that allow/deny permissions for a specific identity (user, group, role).  |
+| Resource-based                            | Inline policies attached to resources to allow/deny access.                                       |
+| Permissions Boundaries                    | Defines the maximum permissions for an identity. Doesn't grant permissions.                       |
+| Organisation Service Control Policy (SCP) | Defines maximum permissions for account members of an organisation or OU. Only denys permissions. |
+| Access Control List (ACL)                 | Grants permissions on resources in other accounts (cross-account).                                |
+| Session                                   | Limits permissions when assuming a role or federated user. .                                      |
+
 ### Policy Evaluation Order
 
 1. If there's an explicit DENY, deny access.
@@ -80,7 +91,6 @@ Via the visual editor -
 - Requires the ```iam:PassRole``` permission.
 - Usually used in combination with ```iam:GetRole``` to view the role being passed.
 - Roles can only be passed to what their ```Trust``` allows.
-- A ```trust policy``` defines which service is allowed to assume a role.
 
 #### Example role passing policy
 
@@ -103,6 +113,12 @@ Via the visual editor -
   ]
 }
 ```
+
+### Trust Policies
+
+- Defines which IAM Principle (accounts, users or roles) is allowed to assume a role.
+- Only type of resource policy supported by IAM.
+
 
 #### Example trust policy
 
@@ -127,10 +143,16 @@ Via the visual editor -
 - Account level.
 - Lists the users in an account and the status of their credentials.
 
-### IAM Access Advisor
+### Access Advisor
 
-- User level.
+- Operates at the User level.
 - Service permissions granted to a user, and when the services were last accessed.
+- Check for unused roles.
+
+### Access Analyzer
+
+- Identify resources that are shared with an external entity (s3 buckets, iam roles etc).
+- Find unintended access to resources & data.
 
 ### AWS Policy Simulator
 
