@@ -1,0 +1,817 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Study notes for the AWS Developer Associate 2021 Exam." name="description"/>
+<meta content="Nathon Fowlie" name="author"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-7.1.5" name="generator"/>
+<title>EC2 - AWS Developer Associate 2021</title>
+<link href="../../assets/stylesheets/main.bde7dde4.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ef6f36e2.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+<link href="../../css/extra.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="default" dir="ltr">
+<script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#ec2">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="AWS Developer Associate 2021" class="md-header__button md-logo" data-md-component="logo" href="../.." title="AWS Developer Associate 2021">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            AWS Developer Associate 2021
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              EC2
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"></path></svg>
+</label>
+<input class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nathonfowlie/education.aws.developer_associate/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM277.3 415.7c-8.4 1.5-11.5-3.7-11.5-8 0-5.4.2-33 .2-55.3 0-15.6-5.2-25.5-11.3-30.7 37-4.1 76-9.2 76-73.1 0-18.2-6.5-27.3-17.1-39 1.7-4.3 7.4-22-1.7-45-13.9-4.3-45.7 17.9-45.7 17.9-13.2-3.7-27.5-5.6-41.6-5.6-14.1 0-28.4 1.9-41.6 5.6 0 0-31.8-22.2-45.7-17.9-9.1 22.9-3.5 40.6-1.7 45-10.6 11.7-15.6 20.8-15.6 39 0 63.6 37.3 69 74.3 73.1-4.8 4.3-9.1 11.7-10.6 22.3-9.5 4.3-33.8 11.7-48.3-13.9-9.1-15.8-25.5-17.1-25.5-17.1-16.2-.2-1.1 10.2-1.1 10.2 10.8 5 18.4 24.2 18.4 24.2 9.7 29.7 56.1 19.7 56.1 19.7 0 13.9.2 36.5.2 40.6 0 4.3-3 9.5-11.5 8-66-22.1-112.2-84.9-112.2-158.3 0-91.8 70.2-161.5 162-161.5S388 165.6 388 257.4c.1 73.4-44.7 136.3-110.7 158.3zm-98.1-61.1c-1.9.4-3.7-.4-3.9-1.7-.2-1.5 1.1-2.8 3-3.2 1.9-.2 3.7.6 3.9 1.9.3 1.3-1 2.6-3 3zm-9.5-.9c0 1.3-1.5 2.4-3.5 2.4-2.2.2-3.7-.9-3.7-2.4 0-1.3 1.5-2.4 3.5-2.4 1.9-.2 3.7.9 3.7 2.4zm-13.7-1.1c-.4 1.3-2.4 1.9-4.1 1.3-1.9-.4-3.2-1.9-2.8-3.2.4-1.3 2.4-1.9 4.1-1.5 2 .6 3.3 2.1 2.8 3.4zm-12.3-5.4c-.9 1.1-2.8.9-4.3-.6-1.5-1.3-1.9-3.2-.9-4.1.9-1.1 2.8-.9 4.3.6 1.3 1.3 1.8 3.3.9 4.1zm-9.1-9.1c-.9.6-2.6 0-3.7-1.5s-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3 1.1 1.5 1.1 3.3 0 4.1zm-6.5-9.7c-.9.9-2.4.4-3.5-.6-1.1-1.3-1.3-2.8-.4-3.5.9-.9 2.4-.4 3.5.6 1.1 1.3 1.3 2.8.4 3.5zm-6.7-7.4c-.4.9-1.7 1.1-2.8.4-1.3-.6-1.9-1.7-1.5-2.6.4-.6 1.5-.9 2.8-.4 1.3.7 1.9 1.8 1.5 2.6z"></path></svg>
+</div>
+<div class="md-source__repository">
+    nathonfowlie/education.aws.developer_associate
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="AWS Developer Associate 2021" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="AWS Developer Associate 2021">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    AWS Developer Associate 2021
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nathonfowlie/education.aws.developer_associate/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM277.3 415.7c-8.4 1.5-11.5-3.7-11.5-8 0-5.4.2-33 .2-55.3 0-15.6-5.2-25.5-11.3-30.7 37-4.1 76-9.2 76-73.1 0-18.2-6.5-27.3-17.1-39 1.7-4.3 7.4-22-1.7-45-13.9-4.3-45.7 17.9-45.7 17.9-13.2-3.7-27.5-5.6-41.6-5.6-14.1 0-28.4 1.9-41.6 5.6 0 0-31.8-22.2-45.7-17.9-9.1 22.9-3.5 40.6-1.7 45-10.6 11.7-15.6 20.8-15.6 39 0 63.6 37.3 69 74.3 73.1-4.8 4.3-9.1 11.7-10.6 22.3-9.5 4.3-33.8 11.7-48.3-13.9-9.1-15.8-25.5-17.1-25.5-17.1-16.2-.2-1.1 10.2-1.1 10.2 10.8 5 18.4 24.2 18.4 24.2 9.7 29.7 56.1 19.7 56.1 19.7 0 13.9.2 36.5.2 40.6 0 4.3-3 9.5-11.5 8-66-22.1-112.2-84.9-112.2-158.3 0-91.8 70.2-161.5 162-161.5S388 165.6 388 257.4c.1 73.4-44.7 136.3-110.7 158.3zm-98.1-61.1c-1.9.4-3.7-.4-3.9-1.7-.2-1.5 1.1-2.8 3-3.2 1.9-.2 3.7.6 3.9 1.9.3 1.3-1 2.6-3 3zm-9.5-.9c0 1.3-1.5 2.4-3.5 2.4-2.2.2-3.7-.9-3.7-2.4 0-1.3 1.5-2.4 3.5-2.4 1.9-.2 3.7.9 3.7 2.4zm-13.7-1.1c-.4 1.3-2.4 1.9-4.1 1.3-1.9-.4-3.2-1.9-2.8-3.2.4-1.3 2.4-1.9 4.1-1.5 2 .6 3.3 2.1 2.8 3.4zm-12.3-5.4c-.9 1.1-2.8.9-4.3-.6-1.5-1.3-1.9-3.2-.9-4.1.9-1.1 2.8-.9 4.3.6 1.3 1.3 1.8 3.3.9 4.1zm-9.1-9.1c-.9.6-2.6 0-3.7-1.5s-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3 1.1 1.5 1.1 3.3 0 4.1zm-6.5-9.7c-.9.9-2.4.4-3.5-.6-1.1-1.3-1.3-2.8-.4-3.5.9-.9 2.4-.4 3.5.6 1.1 1.3 1.3 2.8.4 3.5zm-6.7-7.4c-.4.9-1.7 1.1-2.8.4-1.3-.6-1.9-1.7-1.5-2.6.4-.6 1.5-.9 2.8-.4 1.3.7 1.9 1.8 1.5 2.6z"></path></svg>
+</div>
+<div class="md-source__repository">
+    nathonfowlie/education.aws.developer_associate
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2">
+        CI/CD
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="CI/CD" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          CI/CD
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../cicd/codebuild/">
+        CodeBuild
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../cicd/codecommit/">
+        CodeCommit
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../cicd/codedeploy/">
+        CodeDeploy
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../cicd/codepipeline/">
+        CodePipeline
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../cicd/codestar/">
+        CodeStar
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+        Developing on AWS
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Developing on AWS" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          Developing on AWS
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/appsync/">
+        AppSync
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/athena/">
+        Athena
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/cli/">
+        Command Line Interface (CLI)
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/cloudformation/">
+        CloudFormation
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/cloudfront/">
+        CloudFront
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/cloudtrail/">
+        CloudTrail
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/cloudwatch/">
+        CloudWatch
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/ds/">
+        Directory Services
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/dynamodb/">
+        DynamoDB
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/ecr/">
+        ECR
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/ecs/">
+        ECS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/elasticbeanstalk/">
+        Elastic Beanstalk
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/fargate/">
+        Fargate
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/sdk/">
+        AWS SDK
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/stepfunctions/">
+        Step Functions
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/sts/">
+        STS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developing/xray/">
+        X-Ray
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4">
+        Fundamentals
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Fundamentals" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          Fundamentals
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../acm/">
+        AWS Certificate Manager (ACM)
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../asg/">
+        Auto-Scaling Groups
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../aurora/">
+        Aurora
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../databases/">
+        Databases
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ebs/">
+        EBS
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          EC2
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        EC2
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-ec2">
+    What is EC2?
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#availability-zones">
+    Availability Zones
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#regions">
+    Regions
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#amazon-machine-image-ami">
+    Amazon Machine Image (AMI)
+  </a>
+<nav aria-label="Amazon Machine Image (AMI)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-use-a-custom-ami">
+    Why use a Custom AMI?
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#building-amis">
+    Building AMIs
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#instance-types">
+    Instance Types
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#security-groups">
+    Security Groups
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ec2-user-data">
+    EC2 User Data
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ec-instance-connect">
+    EC Instance Connect
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#elastic-network-interfaces">
+    Elastic Network Interfaces
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#elastic-ips">
+    Elastic IPs
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ec2-instance-launch-types">
+    EC2 Instance Launch Types
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pricing">
+    Pricing
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ec2-instance-metadata">
+    EC2 Instance Metadata
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ec2-instance-store">
+    EC2 Instance Store
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../efs/">
+        Elastic File System
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../elasticache/">
+        ElastiCache
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../elb/">
+        Elastic Load Balancer
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../iam/">
+        Identity &amp; Access Management
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rds/">
+        Relational Database Service
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../route53/">
+        Route53
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../s3/">
+        Simple Storage Service (S3)
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ses/">
+        Simple Email Service (SES)
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../vpc/">
+        VPC
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../identitymanagement/cognito/">
+        Cognito
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6">
+        Messaging
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Messaging" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Messaging
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../messaging/kinesis/">
+        Kinesis
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../messaging/sns/">
+        Simple Notification Service (SNS)
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../messaging/sqs/">
+        Simple Queue Service
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7">
+        Security
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Security" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+          Security
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../security/kms/">
+        AWS Key Management Service (KMS)
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../security/secrets_manager/">
+        Secrets Manager
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../security/ssm/">
+        SSM Parameter Store
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/nathonfowlie/education.aws.developer_associate/edit/master/docs/fundamentals/ec2.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
+</a>
+<h1 id="ec2">EC2<a class="headerlink" href="#ec2" title="Permanent link">¶</a></h1>
+<h2 id="what-is-ec2">What is EC2?<a class="headerlink" href="#what-is-ec2" title="Permanent link">¶</a></h2>
+<ul>
+<li>Launch/manage VMs.</li>
+<li>Store data on EBS.</li>
+<li>ELB for load balancing.</li>
+<li>Manage auto-scaling groups (ASG).</li>
+</ul>
+<h2 id="availability-zones">Availability Zones<a class="headerlink" href="#availability-zones" title="Permanent link">¶</a></h2>
+<ul>
+<li>Physical data centres.</li>
+<li>Isolated power suppliers, cooling, power etc.</li>
+<li>Usually at least 3 per region.</li>
+</ul>
+<h2 id="regions">Regions<a class="headerlink" href="#regions" title="Permanent link">¶</a></h2>
+<ul>
+<li>Geographical location with multiple availability zones.</li>
+</ul>
+<h2 id="amazon-machine-image-ami">Amazon Machine Image (AMI)<a class="headerlink" href="#amazon-machine-image-ami" title="Permanent link">¶</a></h2>
+<ul>
+<li>Base image.</li>
+<li>EC2 User Data can be used to customise the image.</li>
+<li>AMIs are bound to a specific region, but can be copied across regions.</li>
+</ul>
+<h3 id="why-use-a-custom-ami">Why use a Custom AMI?<a class="headerlink" href="#why-use-a-custom-ami" title="Permanent link">¶</a></h3>
+<ul>
+<li>Pre-install required packages.</li>
+<li>Faster boot time by avoiding EC2 User Data.</li>
+<li>Pre-configure monitoring/enterprise software.</li>
+<li>Pre-install applications for faster deployments.</li>
+<li>Support Active Directory out of the box.</li>
+<li>Security concerns (need more control of the image).</li>
+<li>Control the maintenance &amp; updates of AMIs over time.</li>
+<li>Optimised for a specific purpose.</li>
+</ul>
+<h3 id="building-amis">Building AMIs<a class="headerlink" href="#building-amis" title="Permanent link">¶</a></h3>
+<ul>
+<li>Start an EC2 instance, customise, stop it, and create an AMI using the stopped instance.</li>
+</ul>
+<h2 id="instance-types">Instance Types<a class="headerlink" href="#instance-types" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General Purpose</td>
+<td>Balance between compute, memory &amp; networking. Web servers, code repos etc.</td>
+</tr>
+<tr>
+<td>Compute Optimised</td>
+<td>Compute intensive workloads. Batch jobs, transcoding, machine learning, gaming servers etc.</td>
+</tr>
+<tr>
+<td>Memory Optimised</td>
+<td>Workloads processing large datasets. Databases, web cache stores, BI, realtime processing of unstructured data.</td>
+</tr>
+<tr>
+<td>Storage Optimised</td>
+<td>Workloads needing high IO. Databases, transaction processing, redis cache, distributed file systems, data warehousing.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="security-groups">Security Groups<a class="headerlink" href="#security-groups" title="Permanent link">¶</a></h2>
+<ul>
+<li>Provide access to ports.</li>
+<li>Control authorised port ranges.</li>
+<li>Control inbound/outbound traffic.</li>
+<li>Can attach to multiple instances.</li>
+<li>EC2 instance can have multiple security groups.</li>
+<li>Bound to a specific Region/VPC combination.</li>
+<li>Reside outside of the EC2 instance so the instance never recieves blocked traffic.</li>
+<li>All inbound traffic is blocked by default.</li>
+<li>All outbound traffic is permitted by default.</li>
+<li>Security groups can reference another security group for defining inbound/outbound rules (SG1 is allowed to connect to EC2 instances assigned SG2, but SG3 isn't).</li>
+<li>Generally a good idea to keep a seperate SSH security group as it's commonly required.</li>
+<li>Contain ALLOW rules only.</li>
+<li>Timeout errors mean it's a security group problem. Connection refused means it's an application error/EC2 instance isn't launched.</li>
+</ul>
+<h2 id="ec2-user-data">EC2 User Data<a class="headerlink" href="#ec2-user-data" title="Permanent link">¶</a></h2>
+<ul>
+<li>Runs once, the first time an instance is started.</li>
+<li>Runs as root.</li>
+<li>Script is base64 encoded.</li>
+</ul>
+<h2 id="ec-instance-connect">EC Instance Connect<a class="headerlink" href="#ec-instance-connect" title="Permanent link">¶</a></h2>
+<ul>
+<li>Provides web-based SSH access to EC2 instances.</li>
+</ul>
+<h2 id="elastic-network-interfaces">Elastic Network Interfaces<a class="headerlink" href="#elastic-network-interfaces" title="Permanent link">¶</a></h2>
+<ul>
+<li>Virtual NIC.</li>
+<li>Has 1 primary private IPv4 address, and one or more secondary IPv4 addresses.</li>
+<li>Gets 1 Elastic IPv4 address per private IP.</li>
+<li>Can have 1 public IPv4 address.</li>
+<li>Can have multiple security groups.</li>
+<li>Is assigned a Mac address like a physical NIC.</li>
+<li>Bound to a specific Availability Zone.</li>
+<li>Can be created independently and moved between EC2 instances on the fly to support failover.</li>
+</ul>
+<h2 id="elastic-ips">Elastic IPs<a class="headerlink" href="#elastic-ips" title="Permanent link">¶</a></h2>
+<ul>
+<li>Assigned to an EC2 instance, so that it's IP doesn't change when the instance is stopped, then started.</li>
+<li>1 public IPv4 is assigned when the instance is spun up.</li>
+<li>Elastic IP changes whenever the instance is stopped, then started. The private IP is reverved for the life of the instance.</li>
+<li>Maximum of 5 elastic IPs per account (but can be extended).</li>
+<li>Should be avoided as much as possible.</li>
+<li>Costs money when not in use.</li>
+</ul>
+<h2 id="ec2-instance-launch-types">EC2 Instance Launch Types<a class="headerlink" href="#ec2-instance-launch-types" title="Permanent link">¶</a></h2>
+<ul>
+<li>Use reserved instance type for base application, and On-Demand/Spot instance types to handle peaks.</li>
+<li>Zonal reserved instance is bound to an AZ and can be used for capacity reservations.</li>
+<li>Regional reserved instances don't provide capacity reservations.</li>
+<li>Five main attributes - RAM, CPU, Memory, IO, Network, GPU.</li>
+<li>The letter represents the launch types specialty. C = cpu optimised, R = memory optmised etc.</li>
+<li>M instance types are all-rounders. Medium performance.</li>
+<li>T2/T3 instance types are burstable, based on burst credits.</li>
+<li>Burst credits accumulate over time.</li>
+<li>Once burst credits are exhausted, performance will absolutely tank.</li>
+<li>T2 has unlimited burst credits, but it costs money if the burst credit limit is exceeded.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Launch Type</th>
+<th>Description</th>
+<th>Good For</th>
+<th>Committment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On Demmand</td>
+<td>Predictable pricing.<br/><br/>Billed by the second, with a minimum of 60seconds.<br/><br/>- No upfront payment.<br/><br/>- Highest hourly cost of all the instance launch types.</td>
+<td>Short, un-interrupted workloads</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Reserved</td>
+<td>Upto 75% cheaper than On-Demand instances.<br/><br/>Pay upfront.<br/><br/>Must specify the specific instance type to be reserved (SKU).</td>
+<td>Long workloads, or steady state applications (database etc).</td>
+<td>1 - 3 years</td>
+</tr>
+<tr>
+<td>Convertible Reserved</td>
+<td>Upto 54% cheaper than On-Demand instances.<br/><br/>Instance type can be changed.<br/><br/>No upfront payment.</td>
+<td>Long workloads</td>
+<td>1 - 3 years</td>
+</tr>
+<tr>
+<td>Scheduled Reserved</td>
+<td></td>
+<td>A workload needs to be performed within a specific time window (9am-5pm Mon-Fri etc).</td>
+<td>1 year</td>
+</tr>
+<tr>
+<td>Spot</td>
+<td>Spot instance is given to the higest bidder. If someone bids more, then you can lose the instance with zero notice.<br/><br/>Four types - Load balancing (web services), Flexible (batch, ci/cd), Big data (any size, any AZ) and Defined duration (1-6hrs)<br/><br/>90% cheaper than On-Demand instances.</td>
+<td>Short workloads - batch jobs, data analysis, image processing, things that are resilient to failure.</td>
+<td></td>
+</tr>
+<tr>
+<td>Dedicated Instance</td>
+<td>Runs on hardware that is dedicated to a specific account.<br/><br/>Hardware may be shared with other EC2 instances within the same account.<br/><br/>Can only move hardware after the EC2 instance is stopped.<br/><br/>Pay upfront.<br/><br/>Per instance billing.</td>
+<td></td>
+<td>None</td>
+</tr>
+<tr>
+<td>Dedicated Hosts</td>
+<td>Reserve a physical server<br/><br/>Per instance billing<br/><br/>Provides visibility of the underlying sockets and hardware, such as physical cores.<br/><br/>User has full control over the instance placement.<br/><br/>Expensive</td>
+<td>Companies with strong compliance/regulatory requirements, or for bring-your-own-license models where the license is bound to the number of cores.</td>
+<td>3 years</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pricing">Pricing<a class="headerlink" href="#pricing" title="Permanent link">¶</a></h2>
+<ul>
+<li>Hourly prices are based on:<ol>
+<li>Region</li>
+<li>Instance type</li>
+<li>On-Demand vs Spot vs Reserved vs Dedicated hosts.</li>
+<li>IS</li>
+<li>Lots more...</li>
+</ol>
+</li>
+<li>Billed by the second, with a minimum of 60seconds.</li>
+<li>Don't pay for stopped instances.</li>
+<li>Additional cost for storage, data transfer, public/private IPs, load balancing etc.</li>
+</ul>
+<h2 id="ec2-instance-metadata">EC2 Instance Metadata<a class="headerlink" href="#ec2-instance-metadata" title="Permanent link">¶</a></h2>
+<ul>
+<li>Allows EC2 instances to learn about themselves without needing to use an IAM role.</li>
+<li>Accessed via <code>HTTP GET http://169.254.169.254/[latest|&lt;version&gt;]/[dynamic|meta-data|user-data]</code>.</li>
+<li>Can retrieve the IAM role name, but not the policy.</li>
+</ul>
+<h2 id="ec2-instance-store">EC2 Instance Store<a class="headerlink" href="#ec2-instance-store" title="Permanent link">¶</a></h2>
+<ul>
+<li>Instance stores are ephemeral storage.</li>
+<li>Physically attached to the machine.</li>
+<li>Provides better IO performance (up to millions on IOPS).</li>
+<li>Good for buffering/caching/scratch data/temporary content.. Data survives reboots.</li>
+<li>Instance store is lost on termination and can't be resized. Backups need to be operated by the user.</li>
+<li>Up to 7.5TB, striped them to reach 30TB.</li>
+<li>Viewed on the instance as block storage.</li>
+<li>Risk of data loss if hardware fails.</li>
+<li>Some instances don't come with root EBS volumes.</li>
+</ul>
+<hr/>
+<div class="md-source-date">
+<small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 30, 2021</span>
+</small>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon" data-md-component="top" data-md-state="hidden" href="#" title="Back to top">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path></svg>
+</a>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a class="md-footer__link md-footer__link--prev" href="../ebs/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              EBS
+            </div>
+</div>
+</a>
+<a class="md-footer__link md-footer__link--next" href="../efs/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              Elastic File System
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+</div>
+<div class="md-footer-social">
+<a class="md-footer-social__link" href="https://www.linkedin.com/in/nathonfowlie/" rel="noopener" target="_blank" title="LinkedIn">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.top", "search.suggest", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+<script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</body>
+</html>
